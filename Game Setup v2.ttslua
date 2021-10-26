@@ -1,0 +1,297 @@
+infNineS =Global.getVar('infNineS')
+infFourM =Global.getVar('infFourM')
+infCnn =Global.getVar('infCnn')
+infPlDc =Global.getVar('infPlDc')
+infCdyld =Global.getVar('infCdyld')
+infVeS =Global.getVar('infNineS')
+infCnn =Global.getVar('infCnn')
+infPlDc =Global.getVar('infPlDc')
+infVlnDk =Global.getVar('infVlnDk')
+infOneHr =Global.getVar('infOneHr')
+disVInst =Global.getVar('disVInst')
+disRef =Global.getVar('disRef')
+disPow =Global.getVar('disPow')
+disFtTk =Global.getVar('disFtTk')
+dVilSelc =Global.getVar('dVilSelc')
+disCaud =Global.getVar('disCaud')
+marVInst =Global.getVar('marvInst')
+marRef =Global.getVar('marRef')
+marPow =Global.getVar('marPow')
+marVaul =Global.getVar('marVaul')
+maStrTk =Global.getVar('maStrTk')
+marStVa =Global.getVar('marStVa')
+mVilSelc =Global.getVar('mVilSelc')
+marFtSel =Global.getVar('marFtSel')
+marDek =Global.getVar('marDek')
+cusSelc =Global.getVar('cusSelc')
+cusRef =Global.getVar('cusRef')
+cusDeck =Global.getVar('cusDeck')
+
+
+function onLoad()
+    isOpen = false
+    setupButt = "Open Game Setup"
+    gamePickButtonGo()
+    self.interactable = false
+
+end
+
+function gamePickButtonGo()
+    isOpen = false
+    self.createButton({click_function="drawUI", function_owner=self,
+    position={0,0,0}, rotation={90,0,90}, width=350, height=350,
+    tooltip=setupButt})
+    self.createButton({click_function="drawUI", function_owner=self,
+    position={0,0,0}, rotation={0,90,0}, width=345, height=345,
+    tooltip=setupButt})
+end
+
+function drawUI()
+    if (isOpen ~= true) then
+    setupButt = "Close Game Setup"
+    self.clearButtons()
+    gamePickButtonGo()
+    local tooltip1="Spawn Disney Villainous"
+    local tooltip2="Spawn Marvel Villainous"
+    local tooltip3="Spawn Custom Villains"
+    local tooltip4="Spawn Competitive Assets"
+    local tooltip5="Reset Hands"
+    local tooltip6="Reduce Objects"
+    self.createButton({click_function="spawnDis", function_owner=self,
+        position={0,0,-2.5}, rotation={0,180,0}, width=1400, height=440,
+        color={0,.75,0}, font_size=150, tooltip=tooltip1, label="Disney Villainous"})
+    self.createButton({click_function="spawnMar", function_owner=self,
+        position={0,0,-3.5}, rotation={0,180,0}, width=1400, height=440,
+        color={1,1,0}, font_size=150, tooltip=tooltip2, label="Marvel Villainous"})
+    self.createButton({click_function="spawnCus", function_owner=self,
+        position={0,0,-4.5}, rotation={0,180,0}, width=1400, height=440,
+        color={0.625,0.125,0.9375}, font_size=150, tooltip=tooltip3, label="Customs Villains"})
+    self.createButton({click_function="spawnCom", function_owner=self,
+        position={0,0,-5.5}, rotation={0,180,0}, width=1400, height=440,
+        color={0,1,1}, font_size=150, tooltip=tooltip4, label="Competitive Assets"})
+    self.createButton({click_function="resetHands", function_owner=self,
+        position={0,0,-6.5}, rotation={0,180,0}, width=1400, height=440,
+        color={1,0.25,0.25}, font_size=150, tooltip=tooltip5, label="Reset Hands"})
+    self.createButton({click_function="clearRoom", function_owner=self,
+        position={0,0,-7.5}, rotation={0,180,0}, width=1400, height=440,
+        color={1,1,1}, font_size=150, tooltip=tooltip6, label="Reduce Objects"})
+    isOpen = true
+    else
+    self.clearButtons()
+    setupButt = "Open Game Setup"
+    gamePickButtonGo()
+    end
+end
+
+
+function clearTable()
+    resetHands()
+    local clear = getObjectFromGUID('5b9b72').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    self.clearButtons()
+    isOpen = false
+    gamePickButtonGo()
+    setNotes("")
+end
+
+function clearRoom()
+    local clear = getObjectFromGUID('7dea6b').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    local clear = getObjectFromGUID('4c52e4').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    local clear = getObjectFromGUID('cfc969').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    local clear = getObjectFromGUID('91d4e2').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    local clear = getObjectFromGUID('a5af08').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
+    self.clearButtons()
+    isOpen = false
+    gamePickButtonGo()
+    setNotes("")
+end
+
+function spawnDis()
+    setupButt = "Open Game Setup"
+    clearTable()
+    obj = getObjectFromGUID(dVilSelc)
+    x = obj.takeObject({rotation={0,180,0},
+    position={0.00, 1.55, 0.00},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disVInst)
+    x = obj.takeObject({rotation={0,180,0}, position={24.00, 1.48, 0.00},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disPow)
+    x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={12.20, 3.14, -1.09},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disCaud)
+    x = obj.takeObject({position={12.50, 1.63, 0.00},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disFtTk)
+    obj.takeObject({rotation={0,180,0}, position={24.00, 1.72, 0.00},smooth=false})
+    die = getObjectFromGUID(infPlDc)
+    die.takeObject({position={24.00, 2.63, 0.00},smooth=false})
+    obj = getObjectFromGUID(infCdyld)
+    x = obj.takeObject({rotation={0,180,0},
+    position={-14.5, 1.48, 0.00}, smooth=false})
+    obj = getObjectFromGUID(disRef)
+    x = obj.takeObject({rotation={0,180,0},
+    position={35, 1.48, 0.00}, smooth=false})
+    x.setLock(true)
+
+
+end
+
+
+function spawnMar()
+    setupButt = "Open Game Setup"
+    clearTable()
+    obj = getObjectFromGUID(mVilSelc)
+    x = obj.takeObject({position={0,1.55,0},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(marVInst)
+    x = obj.takeObject({position={19,1.48,0},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(marRef)
+    x = obj.takeObject({rotation={0,90,0},position={30,1.48,0},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(marPow)
+    x = obj.takeObject({position={8.09, 3.56, 0.17},rotation={353.74, 185.05, 173.10},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(marVaul)
+    x = obj.takeObject({position={8.5,1.28,0},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(maStrTk)
+    x = obj.takeObject({position={-8.18, 3.2, -0.72},rotation={7.25, 183.42, 173.09},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(marStVa)
+    x = obj.takeObject({position={-8.5,1.28,0},rotation={0,270,0},smooth=false})
+    x.setLock(true)
+    die = getObjectFromGUID(infPlDc)
+    die.takeObject({position={19,2.54,0},smooth=false})
+    obj = getObjectFromGUID(infCdyld)
+    x = obj.takeObject({rotation={0,180,0},
+    position={-14.5, 1.48, 0.00}, smooth=false})
+    obj = getObjectFromGUID(marFtSel)
+    x = obj.takeObject({position={0.00, 1.57, -7.00}, rotation={0,0,0},smooth=false})
+    x.setLock(true)
+    print(" \n \n \n Select which box's Common Fate Deck\n you would like to use, by selecting\n 'Infinite Power' or 'Mischief & Malice'.\n \n If you would like to use the Mixing\n Common Fate Decks ruleset\n introduced in Mischief & Malice,\n select 'Mixed Fated Decks'. \n \n If you would like to spawn in \n all of the Fate Decks seperated, \n choose 'Fate Decks Seperated'.\n \n \n ")
+
+
+end
+
+function spawnCus()
+    spawnDis()
+    setupButt = "Open Game Setup"
+    setNotes("")
+    self.clearButtons()
+    gamePickButtonGo()
+    local bag = getObjectFromGUID(cusSelc)
+    x = bag.takeObject({rotation={0,90,0},
+    position={-36.00, 1.65, 0.00},smooth=false})
+    x.setLock(true)
+    local bag = getObjectFromGUID(cusRef)
+    x = bag.takeObject({rotation={0,90,0},
+    position={-27.5, 1.48, 0.00}, smooth=false})
+    x.setLock(true)
+
+end
+
+function spawnCom()
+    setupButt = "Open Game Setup"
+    self.clearButtons()
+    gamePickButtonGo()
+    local bag = getObjectFromGUID(infNineS)
+    bag.takeObject({rotation={0,180,0},
+    position={0.00, 2.49, -10.00},smooth=false})
+    local bag = getObjectFromGUID(infCnn)
+    cnn = bag.takeObject({rotation={0,90,0},
+    position={-45.00, 1.48, 0.00}, smooth=false})
+    cnn.setLock(true)
+   if findObjectByName("Choose Your Disney Villain") then
+    local bag = getObjectFromGUID(infFourM)
+    bag.takeObject({rotation={0,180,0},
+    position={0.00, 4.85, 20.00}, smooth=false})
+    local bag = getObjectFromGUID(infVlnDk)
+    bag.takeObject({rotation={0,90,180},
+    position={5.00, 1.48, -10.00}, smooth=false})
+    local bag = getObjectFromGUID(infVlnDk)
+    bag.takeObject({rotation={0,90,180},
+    position={-5.00, 1.48, -10.00}, smooth=false})
+   else
+   end
+   if findObjectByName("Choose Your Marvel Villain") then
+    local bag = getObjectFromGUID(infOneHr)
+    bag.takeObject({rotation={0,180,0},
+    position={0.00, 4.85, 20.00}, smooth=false})
+    local bag = getObjectFromGUID(marDek)
+    bag.takeObject({rotation={0,90,180},
+    position={18.00, 1.48, -14.00}, smooth=false})
+    local bag = getObjectFromGUID(marDek)
+    bag.takeObject({rotation={0,90,180},
+    position={0.00, 1.48, -14.00}, smooth=false})
+    local bag = getObjectFromGUID(marDek)
+    bag.takeObject({rotation={0,90,180},
+    position={-18.00, 1.48, -14.00}, smooth=false})
+   else
+   end
+   if findObjectByName("Choose Your Custom Villain") then
+    local bag = getObjectFromGUID(cusDeck)
+    bag.takeObject({rotation={0,270,180},
+    position={5.00, 1.48, -7.00}, smooth=false})
+    local bag = getObjectFromGUID(cusDeck)
+    bag.takeObject({rotation={0,270,180},
+    position={-5.00, 1.48, -7.00}, smooth=false})
+   else
+   end
+
+end
+
+function resetHands()
+    setupButt = "Open Game Setup"
+    self.clearButtons()
+    gamePickButtonGo()
+    colors = {"White","Teal","Purple","Pink","Brown","Blue","Red","Green","Yellow","Orange"}
+    Player['Orange'].setHandTransform({position={-23.67,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
+    Player['Teal'].setHandTransform({position={0,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
+    Player['Pink'].setHandTransform({position={23.67,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
+    Player['Purple'].setHandTransform({position={51.64,3.35,-11.73},scale={15.33,11.90,6.35},rotation={0,270,0}})
+    Player['Brown'].setHandTransform({position={51.64,3.35,11.73},scale={15.33,11.90,6.35},rotation={0,270,0}})
+    Player['Blue'].setHandTransform({position={23.67,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
+    Player['Red'].setHandTransform({position={0,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
+    Player['Green'].setHandTransform({position={-23.67,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
+    Player['Yellow'].setHandTransform({position={-51.64,3.35,11.73},scale={15.33,11.90,6.35},rotation={0,90,0}})
+    Player['White'].setHandTransform({position={-51.64,3.35,-11.73},scale={15.33,11.90,6.35},rotation={0,90,0}})
+    for _,x in pairs(colors) do
+        y = Player[x].getHandObjects()
+        for _,z in ipairs(y) do
+            z.destruct()
+        end
+    end
+end
+
+
+ function findObjectByName(name)
+ for _, obj in ipairs(getAllObjects()) do
+ if obj.getName() == name then return true end
+ end
+ return false
+ end
+
+ function onPlayerConnect(player_id)
+   if player_id.steam_id == "76561198079492701" then
+     player_id.promote()
+   end
+ end
