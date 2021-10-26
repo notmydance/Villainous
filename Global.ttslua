@@ -27,3 +27,42 @@ mmed = "800f9e"
 cusSelc = "bdaf65"
 cusRef = "3f3ebe"
 cusDeck = "3e9458"
+
+function onLoad(save_state)
+    local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
+    log("Trying to retreive latest saved data")
+    function callback(wr)
+        if wr.response_code == 200 then
+            log("Data received.")
+            CUSTOM.setLuaScript(wr.text)
+            CUSTOM = CUSTOM.reload()
+        else
+            log("Something went wrong retreiving newest save")
+            log(wr.error)
+        end
+    end
+    WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom Cheese.ttslua", callback)
+end
+
+function onLoad(save_state)
+    local CHEESE = find_object_by_name("Cheese")
+    log("Trying to retreive latest saved data")
+    function callback(wr)
+        if wr.response_code == 200 then
+            log("Data received.")
+            CHEESE.setLuaScript(wr.text)
+            CHEESE = CHEESE.reload()
+        else
+            log("Something went wrong retreiving newest save")
+            log(wr.error)
+        end
+    end
+    WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Cheese.ttslua", callback)
+end
+
+function find_object_by_name(name)
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == name then return obj end
+    end
+    return nil
+end
