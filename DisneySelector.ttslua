@@ -1,0 +1,123 @@
+--[[
+ Villain Selector Disney:
+ --]]
+
+ buttons = {}
+ buttons["CaptainHook"] = {click_function = "selectCaptainHook", function_owner = self, label = " ", position = {-2.2, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, font_size = 100, tooltip = "Captain Hook"}
+ buttons["CruellaDeVil"] = {click_function = "selectCruellaDeVil", function_owner = self, label = " ", position = {-1.32, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Cruella De Vil"}
+ buttons["DrFacilier"] = {click_function = "selectDrFacilier", function_owner = self, label = " ", position = {-0.44, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Dr. Facilier"}
+ buttons["EvilQueen"] = {click_function = "selectEvilQueen", function_owner = self, label = " ", position = {0.44, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Evil Queen"}
+ buttons["Gaston"] = {click_function = "selectGaston", function_owner = self, label = " ", position = {1.32, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Gaston"}
+ buttons["Hades"] = {click_function = "selectHades", function_owner = self, label = " ", position = {2.2, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Hades"}
+ buttons["HornedKing"] = {click_function = "selectHornedKing", function_owner = self, label = " ", position = {-2.2, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Horned King"}
+ buttons["Jafar"] = {click_function = "selectJafar", function_owner = self, label = " ", position = {-1.32, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Jafar"}
+ buttons["LadyTremaine"] = {click_function = "selectLadyTremaine", function_owner = self, label = " ", position = {-0.44, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Lady Tremaine"}
+ buttons["Maleficent"] = {click_function = "selectMaleficent", function_owner = self, label = " ", position = {0.44, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Maleficent"}
+ buttons["MotherGothel"] = {click_function = "selectMotherGothel", function_owner = self, label = " ", position = {1.32, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Mother Gothel"}
+ buttons["Pete"] = {click_function = "selectPete", function_owner = self, label = " ", position = {2.2, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Pete"}
+ buttons["PrinceJohn"] = {click_function = "selectPrinceJohn", function_owner = self, label = " ", position = {-2.2, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Prince John"}
+ buttons["QueenOfHearts"] = {click_function = "selectQueenOfHearts", function_owner = self, label = " ", position = {-1.32, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Queen of Hearts"}
+ buttons["Ratigan"] = {click_function = "selectRatigan", function_owner = self, label = " ", position = {-0.44, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Ratigan"}
+ buttons["Scar"] = {click_function = "selectScar", function_owner = self, label = " ", position = {0.44, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Scar"}
+ buttons["Ursula"] = {click_function = "selectUrsula", function_owner = self, label = " ", position = {1.32, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Ursula"}
+ buttons["Yzma"] = {click_function = "selectYzma", function_owner = self, label = " ", position = {2.2, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Yzma"}
+
+
+ --On Load: Finds the Villain Info object and creates the buttons
+ function onLoad(save_state)
+ VILLAIN_INFO = findObjectByName("Cheese").getTable('VILLAIN_INFO')
+ for villain, button in pairs(buttons) do
+ self.createButton(button)
+ _G['select'..villain] = function(object, color) selectVillain(villain, color) end
+ end
+ if findPlayerByName("Tavetendo") then
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Weird Flex, but 'OK'", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
+ else
+ if findPlayerByName("Zach") then
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Should Have Picked Hades", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
+ else
+ if findPlayerByName("werothegreat") then
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Just Pick Horned King", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
+ else
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Select a Random Villain", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
+ end
+ end
+ end
+ end
+
+ --Randomizer for when the Random Villain button is selected
+ function selectRandom(object, color)
+ local choices = {}
+ for villains in pairs(VILLAIN_INFO.Disney) do
+ table.insert(choices, villains)
+ end
+ selectVillain(choices[math.random(1,#choices)], color, true)
+ end
+
+ --Sets up the selected villain based on jsons from Villain Info
+ function selectVillain(villain, color, random)
+ local objects = {}
+
+ --Get the Villain json
+ if VILLAIN_INFO.Disney[villain] ~= nil then
+ objects=VILLAIN_INFO.Disney[villain].data
+ end
+ --Delete selector board
+ self.destruct()
+
+ --A callback function to rotate board on y based on selector orientation
+ local selectorRotation = self.getRotation()
+ function callback(object)
+ object.setRotation({object.getRotation().x, object.getRotation().y+selectorRotation.y, object.getRotation().z})
+ end
+
+ --Reverse scale from the selector
+ local selectorScale = self.getScale()
+ selectorScale.x = 1/selectorScale.x
+ selectorScale.y = 1/selectorScale.y
+ selectorScale.z = 1/selectorScale.z
+
+ for _, villainObj in ipairs(objects) do
+ --Take vector from villain table and reverse scale based on selector
+ local vec = Vector(villainObj.move_to) * selectorScale
+ --If the selector was upsidedown, match with a inverse vector
+ if random then
+ vec = vec * Vector({-1, -0.9, 1})
+ end
+ --Set the vector to place them at, and spawn json objects
+ local new_pos = self.positionToWorld(vec)
+ spawnObjectJSON({
+ json              = villainObj.json,
+ position          = new_pos,
+ callback_function = callback
+ })
+ end
+
+ --Move hands to where villain was spawned
+ --Place hand up 4 and 15 back
+ local direction = Vector(0, 4, 15)
+ --Originally 12, tried 18, now 15
+ --Rotate around y axis to same direction as selector
+ direction:rotateOver('y', selectorRotation.y)
+ Player[color].setHandTransform({
+ position = self.getPosition()+direction,
+ rotation = {0, selectorRotation.y+180, 0},
+ scale = {10, 8, 5}
+ })
+ end
+
+ --Finds an object at the table by name and returns it
+ function findObjectByName(name)
+ for _, obj in ipairs(getAllObjects()) do
+ if obj.getName() == name then return obj end
+ end
+ return nil
+ end
+
+ --Determines whether a specific player is at the table by name and returns true or false
+ function findPlayerByName(name)
+ for _, players in ipairs(Player.getPlayers()) do
+ if players.steam_name == name then return true end
+ end
+ return false
+ end
