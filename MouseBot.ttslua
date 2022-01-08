@@ -1,0 +1,428 @@
+defaultBlinkColor = {1,0,0}
+defaultBlinkDuration = 0.5
+
+function updateSave()
+  -- print(JSON.encode_pretty(state))
+  self.script_state = JSON.encode(state)
+end
+
+function onsave()
+  -- print(JSON.encode_pretty(state))
+  -- print("saving!")
+  return JSON.encode(state)
+end
+
+function onload(saved_data)
+  state = JSON.decode(saved_data) or {}
+  -- print(logString(state))
+  -- state contains ml (state.ml) and state.inconfig -- used to track menu state, is user in config menu or in main menu. inconfig defaults to nil
+  -- state.relative = true -- uncomment for default relative
+  if not state.ml then state.ml = {} end
+  -- print("g ", tostring(gameplay))
+  -- ml template: state.ml[guid] = {pos = vec ,w rot = vec , blinker = id returned by wait.time or nil}
+  if next(state.ml) then
+      createMemoryActionButtons()
+  else
+    createSetupButton()
+  end
+end
+
+
+--Beginning Setup
+
+
+--Make setup button
+function createSetupButton()
+  self.setDescription("")
+  self.clearButtons()
+  self.clearContextMenu()
+  state.inconfig = false
+  self.createButton({
+      label="Setup (relative)", click_function="wrapr", function_owner=self,
+      position={0,8.5,0.6}, rotation={0,180,0}, height=80, width=600,
+      font_size=60, color={0,0,0}, font_color={1,1,1}
+  })
+  self.createButton({
+      label="Setup (absolute)", click_function="wrapa", function_owner=self,
+      position={0,0.5,0.85}, rotation={0,180,0}, height=80, width=600,
+      font_size=60, color={0,0,0}, font_color={1,1,1}
+  })
+end
+function wrapr()
+  state.relative = true
+  buttonClick_setup()
+  self.setDescription("memory bag with relative positioning")
+end
+function wrapa()
+  state.relative = false
+  buttonClick_setup()
+  self.setDescription("memory bag with absolute positioning")
+end
+
+--Triggered by setup button,
+function buttonClick_setup()
+    state.mlBackup = shallowcopy(state.ml)
+    addAllBlinkers()
+    createSetupActionButtons()
+end
+
+
+--Creates submit and cancel buttons
+function createSetupActionButtons()
+    self.clearButtons()
+    self.clearContextMenu()
+    state.inconfig = true
+
+    self.createButton({
+        label="Toggle Selected", click_function="toggleSelected", function_owner=self,
+        position={0,0.5,0.6}, rotation={0,180,0}, height=80, width=600,
+        font_size=60, color={0,0,0}, font_color={1,1,1}
+    })
+    self.createButton({
+        label="Cancel", click_function="buttonClick_cancel", function_owner=self,
+        position={0,0.5,0.85}, rotation={0,180,0}, height=80, width=600,
+        font_size=60, color={0,0,0}, font_color={1,1,1}
+    })
+    self.createButton({
+        label="Submit", click_function="buttonClick_submit", function_owner=self,
+        position={0,0.5,1.1}, rotation={0,180,0}, height=80, width=600,
+        font_size=60, color={0,0,0}, font_color={1,1,1}
+    })
+    self.addContextMenuItem("Reset", buttonClick_reset, false)
+    -- self.createButton({
+    --     label="Reset", click_function="buttonClick_reset", function_owner=self,
+    --     position={-2,0.3,0}, rotation={0,90,0}, height=350, width=800,
+    --     font_size=60, color={0,0,0}, font_color={1,1,1}
+    -- })
+end
+
+--During Setup
+
+function addBlinker(obj, color, duration) -- only call for things already in state.ml and are not in bag
+  -- print("l ", logString(state.ml[obj.guid]))
+  if state.ml[obj.guid].blinker then print("aldready blinking") return end
+
+  local color = color or defaultBlinkColor
+  local duration = duration or defaultBlinkDuration
+
+  obj.highlightOn(color, duration) -- first time blink manually
+  state.ml[obj.guid].blinker = Wait.time(function() obj.highlightOn(color, duration) end, duration * 2, -1)
+end
+
+function removeBlinker(guid)
+  local guid = guid
+  if not state.ml[guid] then
+    return
+  else
+    if not state.ml[guid].blinker then
+      return
+    end
+  end
+  local blinker = state.ml[guid].blinker
+  Wait.stop(blinker)
+  state.ml[guid].blinker = nil
+  return guid
+end
+
+function onObjectDestroy(dying_obj)
+  local mdestroyed = removeBlinker(dying_obj.getGUID())
+  if mdestroyed then
+    broadcastToAll("monitored object destroyed: guid " .. mdestroyed)
+  end
+end
+
+function addAllBlinkers(color, duration)
+  local color = color or defaultBlinkColor
+  local duration = duration or defaultBlinkDuration
+  for k,v in pairs(state.ml) do
+    local obj = getObjectFromGUID(k)
+    if obj then
+      addBlinker(obj, color, duration)
+    end
+  end
+end
+
+function removeAllBlinkers()
+  for k,v in pairs(state.ml) do
+    removeBlinker(k)
+  end
+end
+
+-- addHotkey("addb", addAllBlinkers, false)
+-- addHotkey("remb", removeAllBlinkers, false)
+
+function toggleSelected(obj, player)
+  if not next(Player[player].getSelectedObjects()) then
+    print("nothing selected")
+    return
+  end
+  for k,v in ipairs(Player[player].getSelectedObjects()) do
+    -- Player[player].pingTable(v.getPosition())
+    buttonClick_selection(v)
+  end
+end
+
+function quickadd(args)
+  local player = args[1]
+  local obj = args[2]
+  print("yay")
+  -- Player[player].pingTable(self.getPosition())
+  if obj ~= self then
+    return
+  end
+  if not next(Player[player].getSelectedObjects()) then
+    print("please select objects before quickadding")
+    return
+  end
+  buttonClick_reset(player)
+  buttonClick_setup()
+  print("aft")
+  toggleSelected(obj, player)
+  buttonClick_submit(obj, player)
+  buttonClick_recall()
+  createBuildButton()
+end
+
+
+
+--Checks or unchecks buttons
+function buttonClick_selection(obj)
+    if state.ml[obj.getGUID()] == nil then
+        --Adding pos/rot to memory table
+        local pos,rot = {},{}
+        if state.relative then
+          pos = self.positionToLocal(obj.getPosition())
+          rot = obj.getRotation() - self.getRotation()
+        else
+          pos = obj.getPosition()
+          rot = obj.getRotation()
+        end
+
+        --I need to add it like this or it won't save due to indexing issue
+        state.ml[obj.getGUID()] = {
+            pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},
+            rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},
+            lock=obj.getLock()
+        }
+        addBlinker(obj)
+    else
+        removeBlinker(obj.getGUID())
+        state.ml[obj.getGUID()] = nil
+    end
+    -- print(logString(state.ml))
+end
+
+--Cancels selection process
+function buttonClick_cancel()
+  removeAllBlinkers()
+  state.ml = state.mlBackup
+  --
+  if next(state.ml) == nil then
+      createSetupButton()
+  else
+      createMemoryActionButtons()
+  end
+  -- broadcastToAll("Selection Canceled", {1,1,1})
+end
+
+--Saves selections
+function buttonClick_submit(obj, player)
+    if next(state.ml) == nil then
+        printToColor("You cannot submit without any selections.", player)
+    else
+        self.clearButtons()
+        removeAllBlinkers()
+        createMemoryActionButtons()
+        local count = 0
+        for guid in pairs(state.ml) do
+            count = count + 1
+        end
+        printToColor(count.." Objects Saved", player)
+        updateSave()
+    end
+end
+
+--Resets bag to starting status
+function buttonClick_reset(player)
+    removeAllBlinkers()
+    state.ml = {}
+    createSetupButton()
+    printToColor("Tool Reset", player)
+    updateSave()
+end
+
+
+--After Setup
+
+
+--Creates recall and place buttons
+function createMemoryActionButtons()
+    self.clearButtons()
+    self.clearContextMenu()
+    state.inconfig = false
+    self.createButton({
+        label="Place", click_function="buttonClick_place", function_owner=self,
+        position={-0.21,1.5,0.3}, rotation={0,180,0}, height=40, width=235,
+        font_size=60, color={0,0,0}, font_color={1,1,1}
+    })
+    self.createButton({
+        label="Recall", click_function="buttonClick_recall", function_owner=self,
+        position={0.21,1.5,0.3}, rotation={0,180,0}, height=40, width=235,
+        font_size=60, color={0,0,0}, font_color={1,1,1}
+    })
+    self.addContextMenuItem("Setup", buttonClick_setup, false)
+    -- self.createButton({
+    --     label="Setup", click_function="buttonClick_setup", function_owner=self,
+    --     position={-2,0.3,0}, rotation={0,90,0}, height=80, width=290,
+    --     font_size=60, color={0,0,0}, font_color={1,1,1}
+    -- })
+end
+
+function checksmoothplace()
+  if self.getName():find("setup") then
+    return false
+  end
+  return true
+end
+
+--Sends objects from bag/table to their saved position/rotation
+function buttonClick_place()
+
+  local bagObjList = self.getObjects()
+  for guid, entry in pairs(state.ml) do
+      local obj = getObjectFromGUID(guid)
+      local selfPos = self.getPosition()
+      local objpos = entry.pos
+      local objrot = entry.rot
+      if state.relative then
+        objpos = self.positionToWorld(entry.pos)
+        objrot = Vector(entry.rot) + self.getRotation()
+      end
+
+      --If obj is out on the table, move it to the saved pos/rot
+      if obj ~= nil then
+          obj.setPositionSmooth(objpos, false, true)
+          obj.setRotationSmooth(objrot, false, true)
+          obj.setLock(entry.lock)
+      else
+          --If obj is inside of the bag
+          for _, bagObj in ipairs(bagObjList) do
+              if bagObj.guid == guid then
+                  local item = self.takeObject({
+                      guid=guid, position=objpos, rotation=objrot, smooth = checksmoothplace() -- if smooth is true, things falls through each other sometimes. reenable if you want
+                  })
+                  item.setLock(entry.lock)
+                  break
+              end
+          end
+      end
+  end
+  -- broadcastToAll("Objects Placed", {1,1,1})
+end
+
+
+
+--Recalls objects to bag from table
+function buttonClick_recall()
+  for guid, entry in pairs(state.ml) do
+      local obj = getObjectFromGUID(guid)
+      if obj ~= nil then
+        local pos = obj.getPosition()
+        pos.y = pos.y + 1
+        obj.setPositionSmooth(pos, false, true)
+        Wait.condition(function() self.putObject(obj) end, function() return not obj.isSmoothMoving() end)
+      end
+  end
+  -- broadcastToAll("Objects Recalled", {1,1,1})
+end
+
+function getowner(name) -- returns owner in parentheses, for use in colors lookup table
+  if not name then
+    return "error"
+  end
+  return name:sub(name:find("%b()")):sub(2, -2)
+end
+
+function gettype(name) -- returns string before opening parentheses, minus trailing space
+  local name = name or ""
+  local endpos = name:find("%(")
+  if endpos then
+    endpos = endpos - 2 -- 1 left of first brace
+    return name:sub(1, endpos)
+  else
+    return ""
+  end
+end
+
+function build()
+  state.originalPosition = self.getPosition()
+  local rot = self.getRotation()
+  rot.z = 180
+  self.clearButtons()
+
+  if state.builtPosition then
+    self.setRotation(rot)
+    self.setPositionSmooth(state.builtPosition, false, true)
+    self.setLock(false)
+  end
+  Wait.condition(function() buttonClick_place() self.setLock(true) end, function() return self.resting end)
+  local name = self.getName()
+  broadcastToAll(getowner(name) .. " built " .. gettype(name))
+  self.addContextMenuItem("Undo building", undo, false)
+end
+
+
+function undo()
+  local builtpos = self.getPosition()
+  builtpos.y = 1.5
+  state.builtPosition = builtpos
+  local rot = self.getRotation()
+  rot.z = 0
+  self.setRotation(rot)
+  buttonClick_recall()
+
+  local name = self.getName()
+  Wait.condition(
+    function()
+      self.setPositionSmooth(state.originalPosition, false, false)
+      broadcastToAll(getowner(name) .. " changed their mind about the " .. gettype(name))
+      createBuildButton()
+    end,
+    function()
+      return not getObjectFromGUID(next(state.ml))
+    end
+  )
+  updateSave()
+end
+
+function createBuildButton()
+  self.clearButtons()
+  self.clearContextMenu()
+  self.setLock(true)
+  self.createButton({
+    click_function = "build", function_owner = self, label = "Build", tooltip = "If you change your mind, right-click the building",
+    position = {0, 0.1, -1.2}, scale = {0.5, 0.5, 0.5}, width = 700, height = 400, font_size = 300
+  })
+end
+
+--Utility functions
+
+function shallowcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+            copy[orig_key] = orig_value
+        end
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+--Round number (num) to the Nth decimal (dec)
+function round(num, dec)
+  local mult = 10^(dec or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
