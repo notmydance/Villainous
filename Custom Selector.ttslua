@@ -93,7 +93,7 @@ function create_UI()
             local this_villains={}
             for villain, info in pairs(villains) do
                 table.insert(this_villains, {villain, info.tooltip})
-                if section ~= "Jokes" and section ~= "Reskins" then
+                if section ~= "Casual" and section ~= "Reskins" then
                   table.insert(ALL_VILLAINS, {section, villain})
                 end
                 table.insert(assets, {name=villain, url=info.image})
