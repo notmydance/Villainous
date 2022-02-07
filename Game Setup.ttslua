@@ -33,6 +33,7 @@ function onLoad()
     isOpen = false
     setupButt = "Open Game Setup"
     gamePickButtonGo()
+    clearTable()
     self.interactable = false
 
 end
