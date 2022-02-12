@@ -34,7 +34,10 @@ function onLoad()
     setupButt = "Open Game Setup"
     gamePickButtonGo()
     self.interactable = false
-
+    local clear = getObjectFromGUID('5b9b72').getObjects()
+    for k,v in pairs(clear) do
+        v.destruct()
+    end
 end
 
 function gamePickButtonGo()
