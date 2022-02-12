@@ -190,7 +190,6 @@ function spawnMar()
     x.setLock(true)
     print(" \n \n \n Select which box's Common Fate Deck\n you would like to use, by selecting\n 'Infinite Power' or 'Mischief & Malice'.\n \n If you would like to use the Mixing\n Common Fate Decks ruleset\n introduced in Mischief & Malice,\n select 'Mixed Fated Decks'. \n \n If you would like to spawn in \n all of the Fate Decks seperated, \n choose 'Fate Decks Seperated'.\n \n \n ")
 
-
 end
 
 function spawnCus()
@@ -207,6 +206,7 @@ function spawnCus()
     x = bag.takeObject({rotation={0,90,0},
     position={-27.5, 1.48, 0.00}, smooth=false})
     x.setLock(true)
+    print("When you choose your custom Villain, the bottom left number and color is an indicator of the Villain's complexity, both to play as and against. \n \nGreen and 1 are the simplest to understand and are best for new players. \n \nYellow and 2 are of medium complexity and are good for those who are familiar with the game. \n \nRed and 3 are very complex, and are only recommended for those who have a good understanding of Villainous.")
 
 end
 
