@@ -11,6 +11,7 @@ disPow = "70dc21"
 disFtTk = "956149"
 dVilSelc = "9ce8f7"
 disCaud = "f45f1f"
+mouseBot = "e68807"
 marvInst = "5ae010"
 marRef = "914c48"
 marPow = "ae0f7d"
@@ -27,6 +28,10 @@ mmed = "800f9e"
 cusSelc = "bdaf65"
 cusRef = "3f3ebe"
 cusDeck = "3e9458"
+MKrcd = "5f812c"
+MKvln = "074205"
+MKft = "1c5f93"
+MKgud = "27a73a"
 
 function onLoad()
   loadCustom()
@@ -43,48 +48,48 @@ end
 
 function loadSetup()
 local SETUP = find_object_by_name("Game Setup")
-log("Trying to retreive latest saved data")
 function callback(wr)
     if wr.response_code == 200 then
-        log("Data received.")
+        log("Game Setup Complete")
         SETUP.setLuaScript(wr.text)
         SETUP = SETUP.reload()
     else
-        log("Something went wrong retreiving newest save")
+        log("Game Setup Incomplete")
         log(wr.error)
     end
 end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Game%20Setup.ttslua?token=AUV2WCQBBB5MXPJUUG7IFCDBPCNF2", callback)
+WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Game%20Setup.ttslua", callback)
 end
 
 function loadCheese()
 local CHEESE = find_object_by_name("Cheese")
-log("Trying to retreive latest saved data")
+log("Trying to retrieve latest saved cheese")
 function callback(wr)
     if wr.response_code == 200 then
-        log("Data received.")
+        log("Cheese Complete")
         CHEESE.setLuaScript(wr.text)
         CHEESE = CHEESE.reload()
     else
-        log("Something went wrong retreiving newest save")
+        log("Cheese Incomplete")
         log(wr.error)
     end
 end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Cheese.ttslua?token=AUV2WCVWGSRKVTCBDO3DTBTBPCM7A", callback)
+WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Cheese.ttslua", callback)
 end
 
 function loadCustom()
 local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
-log("Trying to retreive latest saved data")
+log("Trying to retrieve latest saved custom cheese")
+WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom%20Cheese.ttslua", callback)
 function callback(wr)
     if wr.response_code == 200 then
-        log("Data received.")
+        log("Custom Complete")
         CUSTOM.setLuaScript(wr.text)
         CUSTOM = CUSTOM.reload()
     else
-        log("Something went wrong retreiving newest save")
+        log("Custom Incomplete")
         log(wr.error)
     end
 end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom%20Cheese.ttslua?token=AUV2WCUF5MMOCCACCOU3GJDBPCNCG", callback)
+WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom%20Cheese.ttslua", callback)
 end
