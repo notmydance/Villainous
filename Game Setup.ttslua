@@ -30,24 +30,34 @@ cusSelc =Global.getVar('cusSelc')
 cusRef =Global.getVar('cusRef')
 cusDeck =Global.getVar('cusDeck')
 
+disney_list = {
+  {name="Despicable Plots", url="http://cloud-3.steamusercontent.com/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
+  {name="Bigger and Badder", url="http://cloud-3.steamusercontent.com/ugc/1840280897952042955/D1C3EA8B89DC1C0073F2EE907CDE9DF4DA80E358/"},
+  {name="Evil Comes Prepared", url="http://cloud-3.steamusercontent.com/ugc/1782840181541267477/BCC0F2235A546C268EA0019ACC287266283BD0E7/"},
+  {name="Perfectly Wretched", url="http://cloud-3.steamusercontent.com/ugc/1699529613851492778/3C87069D1A4EE232BA9F23567817EECB1CE40042/"},
+  {name="The Worst Takes it All", url="http://cloud-3.steamusercontent.com/ugc/1782840181541276129/24929ED7934DC4D5833070D86D0F71CB30D7A097/"},
+  {name="Wicked to the Core", url="http://cloud-3.steamusercontent.com/ugc/1782840181541277144/74D3420D57F7C1BA0C70A7C27003212EE1054636/"},
+  {name="", url=""},
+}
+
+marvel_list = {
+  {name="Infinite Power", url="http://cloud-3.steamusercontent.com/ugc/1782840181541271301/A521640864CE3E63FDED319BB3FDEED87AA888F1/"},
+  {name="Mischief Malice", url="http://cloud-3.steamusercontent.com/ugc/1782840181541272717/7F11C72D4333D9DC3448D0C1D16FE73AFEFECFA5/"},
+  {name="", url=""},
+}
+
+customs_list = {
+  {name="Advanced Calculations", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748639/E853D3E4198BF44E9825361C6E717A42D676792E/"},
+  {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
+  {name="Root of Corruption", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750758/FD2D318056E65D8FAF9B8359C9CE6ECF2DABFA07/"},
+  {name="", url=""},
+}
 
 function onLoad()
-  roomLoad()
-  setNotes("Hello and Welcome to Villainous (Complete)!\r\n\r\nTo get started, click the button on the bottom left of the table to reset the table contents by loading in Disney, Disney (Customs), or Marvel Villainous. Rewinding or reloading the mod will also reset the table's contents. \n\nIf you need clarifications on specific cards, hover over them and a tooltip will appear.\r\n\r\nThe button on the bottom right of the table will allow you to change the image displayed on the table. Simply choose any option in the \"Load From Memory\" menu to select which box art you would like load as table art. \r\n\r\nI do not consistently check comments on this mod in the Steam workshop, so if you experience any bugs or have any feedback, please report them to me in this channel, #tts-mod-bugs-and-feedback in this Discord server: https://discord.gg/3nMjtBntsB\r\n\r\nHave fun and stay absolutely Wicked!")
-  if getObjectFromGUID('5b9b72') then do
     isOpen = false
     setupButt = "Open Game Setup"
     gamePickButtonGo()
     self.interactable = false
-    local clear = getObjectFromGUID('5b9b72').getObjects()
-    for k,v in pairs(clear) do
-        v.destruct()
-    end
-  end
-  else do
-      self.destruct()
-  end
-end
 end
 
 function gamePickButtonGo()
@@ -140,6 +150,7 @@ end
 function spawnDis()
     setupButt = "Open Game Setup"
     clearTable()
+    tableDisney()
     obj = getObjectFromGUID(dVilSelc)
     x = obj.takeObject({rotation={0,180,0},
     position={0.00, 1.55, 0.00},smooth=false})
@@ -178,6 +189,7 @@ end
 function spawnMar()
     setupButt = "Open Game Setup"
     clearTable()
+    tableMarvel()
     obj = getObjectFromGUID(mVilSelc)
     x = obj.takeObject({position={0,1.55,0},smooth=false})
     x.setLock(true)
@@ -217,6 +229,7 @@ function spawnCus()
     setNotes("")
     self.clearButtons()
     gamePickButtonGo()
+    tableCustoms()
     local bag = getObjectFromGUID(cusSelc)
     x = bag.takeObject({rotation={0,90,0},
     position={-36.00, 1.65, 0.00},smooth=false})
@@ -314,6 +327,46 @@ end
  return false
  end
 
+ function loadMasterSetup()
+ local SETUP = find_object_by_name("Game Setup")
+ function callback(wr)
+     if wr.response_code == 200 then
+         SETUP.setLuaScript(wr.text)
+         SETUP = SETUP.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
+ end
+
+ function loadMasterCheese()
+ local CHEESE = find_object_by_name("Cheese")
+ function callback(wr)
+     if wr.response_code == 200 then
+         CHEESE.setLuaScript(wr.text)
+         CHEESE = CHEESE.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
+ end
+
+ function loadMasterCustom()
+ local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
+ function callback(wr)
+     if wr.response_code == 200 then
+         CUSTOM.setLuaScript(wr.text)
+         CUSTOM = CUSTOM.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
+ end
+
  function onPlayerConnect(player_id)
    if player_id.steam_id == "76561198079492701" then
      player_id.promote()
@@ -371,49 +424,65 @@ end
    obj.setScale({91.50, 5.10, 57.00})
  end
 
- function find_object_by_name(name)
-     for _, obj in ipairs(getAllObjects()) do
-         if obj.getName() == name then return obj end
-     end
-     return nil
+function tableDisney()
+  if getObjectFromGUID('af6c71') then do
+ local table_art = getObjectFromGUID('4ee1f2')
+ local shuffled_urls = shuffle_table(disney_list)
+ local params = table.remove(shuffled_urls)
+ table_art.setCustomObject({diffuse=params.url})
+ table_art.reload()
+ table.insert(shuffled_urls, params)
  end
+ else do
+end
+end
+end
 
- function loadMasterSetup()
- local SETUP = find_object_by_name("Game Setup")
- function callback(wr)
-     if wr.response_code == 200 then
-         SETUP.setLuaScript(wr.text)
-         SETUP = SETUP.reload()
-     else
-         log(wr.error)
-     end
+function tableMarvel()
+  if getObjectFromGUID('af6c71') then do
+ local table_art = getObjectFromGUID('4ee1f2')
+ local shuffled_urls = shuffle_table(marvel_list)
+ local params = table.remove(shuffled_urls)
+ table_art.setCustomObject({diffuse=params.url})
+ table_art.reload()
+ table.insert(shuffled_urls, params)
  end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
- end
+ else do
+end
+end
+end
 
- function loadMasterCheese()
- local CHEESE = find_object_by_name("Cheese")
- function callback(wr)
-     if wr.response_code == 200 then
-         CHEESE.setLuaScript(wr.text)
-         CHEESE = CHEESE.reload()
-     else
-         log(wr.error)
-     end
+function tableCustoms()
+  if getObjectFromGUID('af6c71') then do
+ local table_art = getObjectFromGUID('4ee1f2')
+ local shuffled_urls = shuffle_table(customs_list)
+ local params = table.remove(shuffled_urls)
+ table_art.setCustomObject({diffuse=params.url})
+ table_art.reload()
+ table.insert(shuffled_urls, params)
  end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
- end
+ else do
+end
+end
+end
 
- function loadMasterCustom()
- local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
- function callback(wr)
-     if wr.response_code == 200 then
-         CUSTOM.setLuaScript(wr.text)
-         CUSTOM = CUSTOM.reload()
-     else
-         log(wr.error)
-     end
- end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
- end
+function shuffle_table(array)
+    local output = { }
+    local random = math.random
+
+    for index = 1, #array do
+        local offset = index - 1
+        local value = array[index]
+        local randomIndex = offset*random()
+        local flooredIndex = randomIndex - randomIndex%1
+
+        if flooredIndex == offset then
+            output[#output + 1] = value
+        else
+            output[#output + 1] = output[flooredIndex + 1]
+            output[flooredIndex + 1] = value
+        end
+    end
+
+    return output
+end
