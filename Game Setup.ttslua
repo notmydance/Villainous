@@ -393,6 +393,7 @@ end
      obj.setPosition({1000.00, 1000.00, 1000.00})
    end
  end
+ setNotes("Hello and Welcome to Villainous (Complete)!\r\n\r\nTo get started, click the button on the bottom left of the table to reset the table contents by loading in Disney, Disney (Customs), or Marvel Villainous. Rewinding or reloading the mod will also reset the table's contents. \n\nIf you need clarifications on specific cards, hover over them and a tooltip will appear.\r\n\r\nThe button on the bottom right of the table will allow you to change the image displayed on the table. If you have \"Automatic Table Image\" checked, than when you select a new game mode, the table will update the art.\r\n\r\nI do not consistently check comments on this mod in the Steam workshop, so if you experience any bugs or have any feedback, please report them to me in this channel, #tts-mod-bugs-and-feedback in this Discord server: https://discord.gg/3nMjtBntsB\r\n\r\nHave fun and stay absolutely Wicked!"")
  end
 
  function roomSave()
