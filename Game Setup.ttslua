@@ -14,6 +14,8 @@ disPow =Global.getVar('disPow')
 disFtTk =Global.getVar('disFtTk')
 dVilSelc =Global.getVar('dVilSelc')
 disCaud =Global.getVar('disCaud')
+disStr =Global.getVar('disStr')
+disGob =Global.getVar('disGob')
 mouseBot =Global.getVar('mouseBot')
 marVInst =Global.getVar('marvInst')
 marRef =Global.getVar('marRef')
@@ -30,6 +32,8 @@ cusDeck =Global.getVar('cusDeck')
 
 
 function onLoad()
+  roomLoad()
+  setNotes("Hello and Welcome to Villainous (Complete)!\r\n\r\nTo get started, click the button on the bottom left of the table to reset the table contents by loading in Disney, Disney (Customs), or Marvel Villainous. Rewinding or reloading the mod will also reset the table's contents. \n\nIf you need clarifications on specific cards, hover over them and a tooltip will appear.\r\n\r\nThe button on the bottom right of the table will allow you to change the image displayed on the table. Simply choose any option in the \"Load From Memory\" menu to select which box art you would like load as table art. \r\n\r\nI do not consistently check comments on this mod in the Steam workshop, so if you experience any bugs or have any feedback, please report them to me in this channel, #tts-mod-bugs-and-feedback in this Discord server: https://discord.gg/3nMjtBntsB\r\n\r\nHave fun and stay absolutely Wicked!")
   if getObjectFromGUID('5b9b72') then do
     isOpen = false
     setupButt = "Open Game Setup"
@@ -141,24 +145,30 @@ function spawnDis()
     position={0.00, 1.55, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disVInst)
-    x = obj.takeObject({rotation={0,180,0}, position={24.00, 1.48, 0.00},smooth=false})
+    x = obj.takeObject({rotation={0,180,0}, position={25, 1.48, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disPow)
-    x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={12.20, 3.14, -1.09},smooth=false})
+    x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={13.70, 3.10, -1.09}, smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disCaud)
-    x = obj.takeObject({position={12.50, 1.63, 0.00},smooth=false})
+    x = obj.takeObject({rotation={0.00, 290.00, 0.00}, position={14, 1.585, 0.00}, smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disStr)
+    x = obj.takeObject({rotation={0.00, 40.00, 0.00}, position={-13.35, 4.0, -0.25},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(disGob)
+    x = obj.takeObject({rotation={0.00, 180.00, 0.00},position={-13.00, 1.07, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disFtTk)
-    obj.takeObject({rotation={0,180,0}, position={24.00, 1.72, 0.00},smooth=false})
+    obj.takeObject({rotation={0,180,0}, position={25, 1.73, 3.00},smooth=false})
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={24.00, 2.63, 0.00},smooth=false})
+    die.takeObject({position={25, 2.63, 3.00},smooth=false})
     obj = getObjectFromGUID(infCdyld)
     x = obj.takeObject({rotation={0,180,0},
-    position={-14.5, 1.48, 0.00}, smooth=false})
+    position={25, 1.75, -2.00}, smooth=false})
     obj = getObjectFromGUID(disRef)
     x = obj.takeObject({rotation={0,180,0},
-    position={35, 1.48, 0.00}, smooth=false})
+    position={36, 1.48, 0.00}, smooth=false})
     x.setLock(true)
 
 
@@ -190,10 +200,10 @@ function spawnMar()
     x = obj.takeObject({position={-8.5,1.28,0},rotation={0,270,0},smooth=false})
     x.setLock(true)
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={19,2.54,0},smooth=false})
+    die.takeObject({position={19,2.54,3},smooth=false})
     obj = getObjectFromGUID(infCdyld)
     x = obj.takeObject({rotation={0,180,0},
-    position={-14.5, 1.48, 0.00}, smooth=false})
+    position={19, 1.69, -2}, smooth=false})
     obj = getObjectFromGUID(marFtSel)
     x = obj.takeObject({position={0.00, 1.57, -7.00}, rotation={0,0,0},smooth=false})
     x.setLock(true)
@@ -308,4 +318,102 @@ end
    if player_id.steam_id == "76561198079492701" then
      player_id.promote()
    end
+ end
+
+ function roomLoad()
+   if getObjectFromGUID('5b9b72') then do
+     obj = getObjectFromGUID('5b9b72')
+     obj.setPosition({0.00, 4.04, 0.00})
+     obj.setRotation({0.00, 0.00, 0.00})
+     obj.setScale({91.50, 5.10, 57.00})
+     local clear = getObjectFromGUID('5b9b72').getObjects()
+     for k,v in pairs(clear) do
+       v.destruct()
+     end
+   end
+   else do
+     broadcastToAll("Error found, do not delete anything in Villainous (Complete). Try loading the most up to date version in the Steam Workshop.\r\n")
+     loadMasterSetup()
+     loadMasterCustom()
+     loadMasterCheese()
+     obj = getObjectFromGUID('4ee1f2')
+     obj.setPosition({1000.00, 1000.00, 1000.00})
+   end
+ end
+ end
+
+ function roomSave()
+   obj = getObjectFromGUID('4c52e4')
+   obj.setPosition({137.13, 39.52, 51.85})
+   obj.setRotation({0.00, 90.00, 0.00})
+   obj.setScale({150.00, 100.00, 10.00})
+   obj = getObjectFromGUID('7dea6b')
+   obj.setPosition({-43.32, 51.40, 140.39})
+   obj.setRotation({0.00, 0.00, 0.00})
+   obj.setScale({44.05, 5.10, 2.09})
+   obj = getObjectFromGUID('91d4e2')
+   obj.setPosition({-137.13, 39.52, 51.85})
+   obj.setRotation({0.00, 90.00, 0.00})
+   obj.setScale({150.00, 100.00, 10.00})
+   obj = getObjectFromGUID('cfc969')
+   obj.setPosition({-1.18, 48.70, -109.27})
+   obj.setRotation({0.00, 0.00, 0.00})
+   obj.setScale({284.40, 132.40, 70.65})
+   obj = getObjectFromGUID('3e455f')
+   obj.setPosition({111.79, 24.53, -99.20})
+   obj.setRotation({0.00, 0.00, 0.00})
+   obj.setScale({25.17, 32.11, 21.10})
+   obj = getObjectFromGUID('4ee1f2')
+   obj.setPosition({0.00, -9.00, 0.00})
+   obj = getObjectFromGUID('5b9b72')
+   obj.setPosition({0.00, 4.04, 0.00})
+   obj.setRotation({0.00, 0.00, 0.00})
+   obj.setScale({91.50, 5.10, 57.00})
+ end
+
+ function find_object_by_name(name)
+     for _, obj in ipairs(getAllObjects()) do
+         if obj.getName() == name then return obj end
+     end
+     return nil
+ end
+
+ function loadMasterSetup()
+ local SETUP = find_object_by_name("Game Setup")
+ function callback(wr)
+     if wr.response_code == 200 then
+         SETUP.setLuaScript(wr.text)
+         SETUP = SETUP.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
+ end
+
+ function loadMasterCheese()
+ local CHEESE = find_object_by_name("Cheese")
+ function callback(wr)
+     if wr.response_code == 200 then
+         CHEESE.setLuaScript(wr.text)
+         CHEESE = CHEESE.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
+ end
+
+ function loadMasterCustom()
+ local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
+ function callback(wr)
+     if wr.response_code == 200 then
+         CUSTOM.setLuaScript(wr.text)
+         CUSTOM = CUSTOM.reload()
+     else
+         log(wr.error)
+     end
+ end
+ WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
  end
