@@ -150,7 +150,6 @@ end
 function onSave()
   if getObjectFromGUID('640767') then self.destruct() flipTable() else end
   if getObjectFromGUID('58cf0e') then self.destruct() flipTable() else end
-  if getObjectFromGUID('dde81f') then self.destruct() flipTable() else end
   if getObjectFromGUID('26d90b') then self.destruct() flipTable() else end
   if getObjectFromGUID('4171a8') then self.destruct() flipTable() else end
   if getObjectFromGUID('f0d1ab') then self.destruct() flipTable() else end
