@@ -147,6 +147,31 @@ function clearRoom()
     setNotes("")
 end
 
+function onSave()
+  if getObjectFromGUID('640767') then self.destruct() flipTable() else end
+  if getObjectFromGUID('58cf0e') then self.destruct() flipTable() else end
+  if getObjectFromGUID('dde81f') then self.destruct() flipTable() else end
+  if getObjectFromGUID('26d90b') then self.destruct() flipTable() else end
+  if getObjectFromGUID('4171a8') then self.destruct() flipTable() else end
+  if getObjectFromGUID('f0d1ab') then self.destruct() flipTable() else end
+  if getObjectFromGUID('969a40') then self.destruct() flipTable() else end
+  if getObjectFromGUID('aa6cc8') then self.destruct() flipTable() else end
+  if getObjectFromGUID('2d1127') then self.destruct() flipTable() else end
+  if getObjectFromGUID('e1cc65') then self.destruct() flipTable() else end
+  if getObjectFromGUID('f2911c') then self.destruct() flipTable() else end
+  if getObjectFromGUID('a2c6cf') then self.destruct() flipTable() else end
+  if getObjectFromGUID('32edd2') then self.destruct() flipTable() else end
+  if getObjectFromGUID('8f421b') then self.destruct() flipTable() else end
+  if getObjectFromGUID('53b36e') then self.destruct() flipTable() else end
+  if getObjectFromGUID('e86276') then self.destruct() flipTable() else end
+  if getObjectFromGUID('f81448') then self.destruct() flipTable() else end
+  if getObjectFromGUID('4bd7b5') then self.destruct() flipTable() else end
+  if getObjectFromGUID('7cbc78') then self.destruct() flipTable() else end
+  if getObjectFromGUID('61e769') then self.destruct() flipTable() else end
+  if getObjectFromGUID('8b9903') then self.destruct() flipTable() else end
+  if getObjectFromGUID('af4373') then self.destruct() flipTable() else end
+end
+
 function spawnDis()
     setupButt = "Open Game Setup"
     clearTable()
