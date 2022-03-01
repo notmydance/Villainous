@@ -484,6 +484,5 @@ function shuffle_table(array)
             output[flooredIndex + 1] = value
         end
     end
-
     return output
 end
