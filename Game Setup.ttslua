@@ -327,45 +327,14 @@ end
  return false
  end
 
- function loadMasterSetup()
- local SETUP = find_object_by_name("Game Setup")
- function callback(wr)
-     if wr.response_code == 200 then
-         SETUP.setLuaScript(wr.text)
-         SETUP = SETUP.reload()
-     else
-         log(wr.error)
-     end
- end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
- end
-
- function loadMasterCheese()
+ function loadMaster()
  local CHEESE = find_object_by_name("Cheese")
- function callback(wr)
-     if wr.response_code == 200 then
-         CHEESE.setLuaScript(wr.text)
-         CHEESE = CHEESE.reload()
-     else
-         log(wr.error)
-     end
- end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCheese.ttslua", callback)
- end
-
- function loadMasterCustom()
+ local SETUP = find_object_by_name("Game Setup")
  local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
- function callback(wr)
-     if wr.response_code == 200 then
-         CUSTOM.setLuaScript(wr.text)
-         CUSTOM = CUSTOM.reload()
-     else
-         log(wr.error)
-     end
- end
- WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/MasterCustom%20Cheese.ttslua", callback)
- end
+ destroyObject(CHEESE)
+ destroyObject(SETUP)
+ destroyObject(CUSTOM)
+end
 
  function onPlayerConnect(player_id)
    if player_id.steam_id == "76561198079492701" then
@@ -386,9 +355,6 @@ end
    end
    else do
      broadcastToAll("Error found, do not delete anything in Villainous (Complete). Try loading the most up to date version in the Steam Workshop.\r\n")
-     loadMasterSetup()
-     loadMasterCustom()
-     loadMasterCheese()
      obj = getObjectFromGUID('4ee1f2')
      obj.setPosition({1000.00, 1000.00, 1000.00})
    end
