@@ -3,24 +3,27 @@
  --]]
 
  buttons = {}
- buttons["CaptainHook"] = {click_function = "selectCaptainHook", function_owner = self, label = " ", position = {-2.2, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, font_size = 100, tooltip = "Captain Hook"}
- buttons["CruellaDeVil"] = {click_function = "selectCruellaDeVil", function_owner = self, label = " ", position = {-1.32, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Cruella De Vil"}
- buttons["DrFacilier"] = {click_function = "selectDrFacilier", function_owner = self, label = " ", position = {-0.44, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Dr. Facilier"}
- buttons["EvilQueen"] = {click_function = "selectEvilQueen", function_owner = self, label = " ", position = {0.44, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Evil Queen"}
- buttons["Gaston"] = {click_function = "selectGaston", function_owner = self, label = " ", position = {1.32, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Gaston"}
- buttons["Hades"] = {click_function = "selectHades", function_owner = self, label = " ", position = {2.2, 0, -0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Hades"}
- buttons["HornedKing"] = {click_function = "selectHornedKing", function_owner = self, label = " ", position = {-2.2, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Horned King"}
- buttons["Jafar"] = {click_function = "selectJafar", function_owner = self, label = " ", position = {-1.32, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Jafar"}
- buttons["LadyTremaine"] = {click_function = "selectLadyTremaine", function_owner = self, label = " ", position = {-0.44, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Lady Tremaine"}
- buttons["Maleficent"] = {click_function = "selectMaleficent", function_owner = self, label = " ", position = {0.44, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Maleficent"}
- buttons["MotherGothel"] = {click_function = "selectMotherGothel", function_owner = self, label = " ", position = {1.32, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Mother Gothel"}
- buttons["Pete"] = {click_function = "selectPete", function_owner = self, label = " ", position = {2.2, 0, 0}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Pete"}
- buttons["PrinceJohn"] = {click_function = "selectPrinceJohn", function_owner = self, label = " ", position = {-2.2, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Prince John"}
- buttons["QueenOfHearts"] = {click_function = "selectQueenOfHearts", function_owner = self, label = " ", position = {-1.32, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Queen of Hearts"}
- buttons["Ratigan"] = {click_function = "selectRatigan", function_owner = self, label = " ", position = {-0.44, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Ratigan"}
- buttons["Scar"] = {click_function = "selectScar", function_owner = self, label = " ", position = {0.44, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Scar"}
- buttons["Ursula"] = {click_function = "selectUrsula", function_owner = self, label = " ", position = {1.32, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Ursula"}
- buttons["Yzma"] = {click_function = "selectYzma", function_owner = self, label = " ", position = {2.2, 0, 0.89}, scale = {1.1, 0, 1.1}, width = 400, height = 400, tooltip = "Yzma"}
+ buttons["CaptainHook"] = {click_function = "selectCaptainHook", function_owner = self, label = " ", position = {-2.46, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Captain Hook"}
+ buttons["CruellaDeVil"] = {click_function = "selectCruellaDeVil", function_owner = self, label = " ", position = {-1.64, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Cruella De Vil"}
+ buttons["DrFacilier"] = {click_function = "selectDrFacilier", function_owner = self, label = " ", position = {-0.82, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Dr. Facilier"}
+ buttons["EvilQueen"] = {click_function = "selectEvilQueen", function_owner = self, label = " ", position = {0, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Evil Queen"}
+ buttons["Gaston"] = {click_function = "selectGaston", function_owner = self, label = " ", position = {0.82, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Gaston"}
+ buttons["Hades"] = {click_function = "selectHades", function_owner = self, label = " ", position = {1.64, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Hades"}
+ buttons["HornedKing"] = {click_function = "selectHornedKing", function_owner = self, label = " ", position = {2.46, 0, -0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Horned King"}
+ buttons["Jafar"] = {click_function = "selectJafar", function_owner = self, label = " ", position = {-2.46, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Jafar"}
+ buttons["LadyTremaine"] = {click_function = "selectLadyTremaine", function_owner = self, label = " ", position = {-1.64, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Lady Tremaine"}
+ buttons["Lotso"] = {click_function = "selectLotso", function_owner = self, label = " ", position = {-0.81, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Lotso"}
+ buttons["MadamMim"] = {click_function = "selectMadamMim", function_owner = self, label = " ", position = {0, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Madam Mim"}
+ buttons["Maleficent"] = {click_function = "selectMaleficent", function_owner = self, label = " ", position = {0.81, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Maleficent"}
+ buttons["MotherGothel"] = {click_function = "selectMotherGothel", function_owner = self, label = " ", position = {1.64, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Mother Gothel"}
+ buttons["Pete"] = {click_function = "selectPete", function_owner = self, label = " ", position = {2.46, 0, 0}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Pete"}
+ buttons["PrinceJohn"] = {click_function = "selectPrinceJohn", function_owner = self, label = " ", position = {-2.46, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Prince John"}
+ buttons["QueenOfHearts"] = {click_function = "selectQueenOfHearts", function_owner = self, label = " ", position = {-1.64, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Queen of Hearts"}
+ buttons["Ratigan"] = {click_function = "selectRatigan", function_owner = self, label = " ", position = {-0.81, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Ratigan"}
+ buttons["Scar"] = {click_function = "selectScar", function_owner = self, label = " ", position = {0, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Scar"}
+ buttons["Syndrome"] = {click_function = "selectSyndrome", function_owner = self, label = " ", position = {0.81, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Syndrome"}
+ buttons["Ursula"] = {click_function = "selectUrsula", function_owner = self, label = " ", position = {1.64, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Ursula"}
+ buttons["Yzma"] = {click_function = "selectYzma", function_owner = self, label = " ", position = {2.46, 0, 0.81}, scale = {1.1, 0, 1.1}, width = 379, height = 379, tooltip = "Yzma"}
 
 
  --On Load: Finds the Villain Info object and creates the buttons
@@ -30,19 +33,7 @@
  self.createButton(button)
  _G['select'..villain] = function(object, color) selectVillain(villain, color) end
  end
- if findPlayerByName("Tavetendo") then
- self.createButton({click_function = "selectRandom", function_owner = self, label = "Weird Flex, but 'OK'", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
- else
- if findPlayerByName("Zach") then
- self.createButton({click_function = "selectRandom", function_owner = self, label = "Should Have Picked Hades", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
- else
- if findPlayerByName("werothegreat") then
- self.createButton({click_function = "selectRandom", function_owner = self, label = "Just Pick Horned King", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
- else
- self.createButton({click_function = "selectRandom", function_owner = self, label = "Select a Random Villain", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 0, 1}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
- end
- end
- end
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Select a Random Villain", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1.08, 0, 0.94}, width = 2550, height = 1270, font_size = 200, tooltip="Select a Random Villain"})
  end
 
  --Randomizer for when the Random Villain button is selected

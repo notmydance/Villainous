@@ -32,7 +32,7 @@ cusDeck =Global.getVar('cusDeck')
 
 disney_list = {
   {name="Despicable Plots", url="http://cloud-3.steamusercontent.com/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
-  {name="Bigger and Badder", url="http://cloud-3.steamusercontent.com/ugc/1840280897952042955/D1C3EA8B89DC1C0073F2EE907CDE9DF4DA80E358/"},
+  {name="Bigger and Badder", url="http://cloud-3.steamusercontent.com/ugc/1822276928232865079/D0E9554BA417D2A2B264A47D02691902B823C89A/"},
   {name="Evil Comes Prepared", url="http://cloud-3.steamusercontent.com/ugc/1782840181541267477/BCC0F2235A546C268EA0019ACC287266283BD0E7/"},
   {name="Perfectly Wretched", url="http://cloud-3.steamusercontent.com/ugc/1699529613851492778/3C87069D1A4EE232BA9F23567817EECB1CE40042/"},
   {name="The Worst Takes it All", url="http://cloud-3.steamusercontent.com/ugc/1782840181541276129/24929ED7934DC4D5833070D86D0F71CB30D7A097/"},
@@ -54,10 +54,10 @@ customs_list = {
 }
 
 function onLoad()
-    isOpen = false
-    setupButt = "Open Game Setup"
-    gamePickButtonGo()
-    self.interactable = false
+  isOpen = false
+  setupButt = "Open Game Setup"
+  gamePickButtonGo()
+  self.interactable = false
 end
 
 function gamePickButtonGo()
@@ -106,7 +106,6 @@ function drawUI()
     gamePickButtonGo()
     end
 end
-
 
 function clearTable()
     resetHands()
@@ -180,7 +179,7 @@ function spawnDis()
     position={0.00, 1.55, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disVInst)
-    x = obj.takeObject({rotation={0,180,0}, position={25, 1.48, 0.00},smooth=false})
+    x = obj.takeObject({rotation={0,270,0}, position={36.5, 1.48, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disPow)
     x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={13.70, 3.10, -1.09}, smooth=false})
@@ -195,15 +194,15 @@ function spawnDis()
     x = obj.takeObject({rotation={0.00, 180.00, 0.00},position={-13.00, 1.07, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disFtTk)
-    obj.takeObject({rotation={0,180,0}, position={25, 1.73, 3.00},smooth=false})
+    obj.takeObject({rotation={0,270,0}, position={37, 1.74, 0},smooth=false})
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={25, 2.63, 3.00},smooth=false})
+    die.takeObject({position={37, 2.46, 0},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,180,0},
-    position={25, 1.75, -2.00}, smooth=false})
+    x = obj.takeObject({rotation={0,270,0},
+    position={33.25, 1.75, 0}, smooth=false})
     obj = getObjectFromGUID(disRef)
-    x = obj.takeObject({rotation={0,180,0},
-    position={36, 1.48, 0.00}, smooth=false})
+    x = obj.takeObject({rotation={0,270,0},
+    position={27.50, 1.48, 0.00}, smooth=false})
     x.setLock(true)
 
 
