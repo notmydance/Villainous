@@ -274,13 +274,13 @@ function spawnCom()
     position={0.00, 2.49, -10.00},smooth=false})
     local bag = getObjectFromGUID(mouseBot)
     bag.takeObject({rotation={0,0,0},
-    position={43.00, 1.40, 0.00},smooth=false})
+    position={12.00, 1.40, 0.00},smooth=false})
     bag.setLock(true)
     local bag = getObjectFromGUID(infCnn)
     cnn = bag.takeObject({rotation={0,90,0},
     position={-45.00, 1.48, 0.00}, smooth=false})
     cnn.setLock(true)
-   if findObjectByName("Choose Your Disney Villain") then
+   if findObjectByName("Choose Your Disney Villain [BAG]") then
     local bag = getObjectFromGUID(infFourM)
     bag.takeObject({rotation={0,180,0},
     position={0.00, 4.85, 20.00}, smooth=false})
@@ -292,7 +292,7 @@ function spawnCom()
     position={-5.00, 1.48, -10.00}, smooth=false})
    else
    end
-   if findObjectByName("Choose Your Marvel Villain") then
+   if findObjectByName("Choose Your Marvel Villain [BAG]") then
     local bag = getObjectFromGUID(infOneHr)
     bag.takeObject({rotation={0,180,0},
     position={0.00, 4.85, 20.00}, smooth=false})
@@ -307,7 +307,7 @@ function spawnCom()
     position={-18.00, 1.48, -14.00}, smooth=false})
    else
    end
-   if findObjectByName("Choose Your Custom Villain") then
+   if findObjectByName("Choose Your Custom Villain [BAG]") then
     local bag = getObjectFromGUID(cusDeck)
     bag.takeObject({rotation={0,270,180},
     position={5.00, 1.48, -7.00}, smooth=false})
