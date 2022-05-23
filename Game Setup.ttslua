@@ -274,7 +274,7 @@ function spawnCom()
     position={0.00, 2.49, -10.00},smooth=false})
     local bag = getObjectFromGUID(mouseBot)
     bag.takeObject({rotation={0,0,0},
-    position={12.00, 1.40, 0.00},smooth=false})
+    position={0, 1.40, 12.00},smooth=false})
     bag.setLock(true)
     local bag = getObjectFromGUID(infCnn)
     cnn = bag.takeObject({rotation={0,90,0},
