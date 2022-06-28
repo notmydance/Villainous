@@ -47,9 +47,10 @@ marvel_list = {
 }
 
 customs_list = {
-  {name="Advanced Calculations", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748639/E853D3E4198BF44E9825361C6E717A42D676792E/"},
   {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
-  {name="Root of Corruption", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750758/FD2D318056E65D8FAF9B8359C9CE6ECF2DABFA07/"},
+  {name="Chaos and Control", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748718/C0C42CDBD1E5446F2C10C8859E04F445F87F8D4C/"},
+  {name="Completely Expected", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748820/543231225364555FD8485D3CB5E793E63FBF9CDE/"},
+  {name="Red-handed", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750568/743D2921FA5A7B5F62F7470580C8641E1FFECEDC/"},
   {name="", url=""},
 }
 
