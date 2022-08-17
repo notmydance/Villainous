@@ -48,9 +48,24 @@ marvel_list = {
 
 customs_list = {
   {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
-  {name="Chaos and Control", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748718/C0C42CDBD1E5446F2C10C8859E04F445F87F8D4C/"},
+  {name="Advanced Calculations", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748639/E853D3E4198BF44E9825361C6E717A42D676792E/"},
+  {name="Hostile Takeover", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750065/F1B50484774248B4A4D993968755CF0266561744/"},
+  {name="Root of Corruption", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750758/FD2D318056E65D8FAF9B8359C9CE6ECF2DABFA07/"},
+  {name="Fire with Fire", url="http://cloud-3.steamusercontent.com/ugc/1753581023981663830/0AD4242BFB4DE3A914E4EDFF9E9A7525F08526B4/"},
+  {name="On Razors Edge", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750360/C49AFC05B34B905007F389F307C211F40D181452/"},
+  {name="Monsters and Men", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750207/2BC88ABCB580B3D4FC2F97AD912B8910AC582228/"},
+  {name="Dreamland Nightmares", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749146/288CEA39CA7EBA016874BB18A845C3A45A0803C8/"},
+  {name="Dirty Money", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749048/C91D912679A30E9B24AAB87501FFF263982FFDD6/"},
+  {name="From the Shadows", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749271/E4324324A8EAFA7E364DBBFAECEB8BCE3DA6109F/"},
+  {name="Ham, Eggs, Spam", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749457/AADCDC61420581E95B7F4BCD0CA38EE4C6C97D9B/"},
+  {name="Hide N Seek", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749953/63DE9CD7F2D20EF323521DBBA4C74CE95A3D8E3C/"},
+  {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
+  {name="Parental Advisory", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750455/35CB57E87107267D6A6D2388D07171AE9F624274/"},
   {name="Completely Expected", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748820/543231225364555FD8485D3CB5E793E63FBF9CDE/"},
   {name="Red-handed", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750568/743D2921FA5A7B5F62F7470580C8641E1FFECEDC/"},
+  {name="Chaos and Control", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748718/C0C42CDBD1E5446F2C10C8859E04F445F87F8D4C/"},
+  {name="Code of Conduct", url="http://cloud-3.steamusercontent.com/ugc/1840283540522674203/8C376A4ABAA3864496A70D9D8547D6410D6E903C/"},
+  {name="Secret Recipe", url="http://cloud-3.steamusercontent.com/ugc/1842550789977504138/BF9913769EEEC77057CA11CFB83642B7A407DC1E/"},
   {name="", url=""},
 }
 
