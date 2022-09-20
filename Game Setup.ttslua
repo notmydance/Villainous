@@ -43,7 +43,7 @@ disney_list = {
 marvel_list = {
   {name="Infinite Power", url="http://cloud-3.steamusercontent.com/ugc/1782840181541271301/A521640864CE3E63FDED319BB3FDEED87AA888F1/"},
   {name="Mischief Malice", url="http://cloud-3.steamusercontent.com/ugc/1782840181541272717/7F11C72D4333D9DC3448D0C1D16FE73AFEFECFA5/"},
-  {name="", url=""},
+  {name="We are Venom", url="http://cloud-3.steamusercontent.com/ugc/1793018747653914063/3676A136250B7491571CD87D3919F3ECA4264A84/"},
 }
 
 customs_list = {
@@ -58,7 +58,7 @@ customs_list = {
   {name="Dirty Money", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749048/C91D912679A30E9B24AAB87501FFF263982FFDD6/"},
   {name="From the Shadows", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749271/E4324324A8EAFA7E364DBBFAECEB8BCE3DA6109F/"},
   {name="Ham, Eggs, Spam", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749457/AADCDC61420581E95B7F4BCD0CA38EE4C6C97D9B/"},
-  {name="Hide N Seek", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749953/63DE9CD7F2D20EF323521DBBA4C74CE95A3D8E3C/"},
+  {name="", url=""},
   {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
   {name="Parental Advisory", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750455/35CB57E87107267D6A6D2388D07171AE9F624274/"},
   {name="Completely Expected", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748820/543231225364555FD8485D3CB5E793E63FBF9CDE/"},
@@ -94,27 +94,19 @@ function drawUI()
     local tooltip1="Spawn Disney Villainous"
     local tooltip2="Spawn Marvel Villainous"
     local tooltip3="Spawn Custom Villains"
-    local tooltip4="Spawn Competitive Assets"
-    local tooltip5="Reset Hands"
-    local tooltip6="Reduce Objects"
+    local tooltip4="Toggle Extra Options"
     self.createButton({click_function="spawnDis", function_owner=self,
-        position={0,0,-2.5}, rotation={0,180,0}, width=1400, height=440,
+        position={0,0,-2.5}, rotation={0,180,0}, width=1500, height=440,
         color={0,.75,0}, font_size=150, tooltip=tooltip1, label="Disney Villainous"})
     self.createButton({click_function="spawnMar", function_owner=self,
-        position={0,0,-3.5}, rotation={0,180,0}, width=1400, height=440,
+        position={0,0,-3.5}, rotation={0,180,0}, width=1500, height=440,
         color={1,1,0}, font_size=150, tooltip=tooltip2, label="Marvel Villainous"})
-    self.createButton({click_function="spawnCus", function_owner=self,
-        position={0,0,-4.5}, rotation={0,180,0}, width=1400, height=440,
-        color={0.625,0.125,0.9375}, font_size=150, tooltip=tooltip3, label="Customs Villains"})
-    self.createButton({click_function="spawnCom", function_owner=self,
-        position={0,0,-5.5}, rotation={0,180,0}, width=1400, height=440,
-        color={0,1,1}, font_size=150, tooltip=tooltip4, label="Competitive Assets"})
-    self.createButton({click_function="resetHands", function_owner=self,
-        position={0,0,-6.5}, rotation={0,180,0}, width=1400, height=440,
-        color={1,0.25,0.25}, font_size=150, tooltip=tooltip5, label="Reset Hands"})
-    self.createButton({click_function="clearRoom", function_owner=self,
-        position={0,0,-7.5}, rotation={0,180,0}, width=1400, height=440,
-        color={1,1,1}, font_size=150, tooltip=tooltip6, label="Reduce Objects"})
+    self.createButton({click_function="spawnDCus", function_owner=self,
+        position={0,0,-4.5}, rotation={0,180,0}, width=1500, height=440,
+        color={0.625,0.125,0.9375}, font_size=150, tooltip=tooltip3, label="Custom Villains"})
+    self.createButton({click_function="listOpt", function_owner=self,
+        position={0,0,-5.5}, rotation={0,180,0}, width=1500, height=440,
+        color={1,1,1}, font_size=150, tooltip=tooltip4, label="◀    Extra Options      "})
     isOpen = true
     else
     self.clearButtons()
@@ -122,6 +114,32 @@ function drawUI()
     gamePickButtonGo()
     end
 end
+
+function listOpt()
+    if (isList ~= true) then
+    self.clearButtons()
+    gamePickButtonGo()
+    drawUI()
+    local tooltip21="Spawn Competitive Assets"
+    local tooltip22="Reset Hands"
+    local tooltip23="Reduce Objects"
+    self.createButton({click_function="spawnCom", function_owner=self,
+        position={2.7,0,-3.5}, rotation={0,180,0}, width=1000, height=440,
+        color={0,1,1}, font_size=150, tooltip=tooltip21, label="Competitive\nAssets"})
+    self.createButton({click_function="resetHands", function_owner=self,
+        position={2.7,0,-4.5}, rotation={0,180,0}, width=1000, height=440,
+        color={1,0,0}, font_size=150, tooltip=tooltip22, label="Reset\nHands"})
+    self.createButton({click_function="clearRoom", function_owner=self,
+        position={2.7,0,-5.5}, rotation={0,180,0}, width=1000, height=440,
+        color={1,0.5,0}, font_size=150, tooltip=tooltip23, label="Reduce\nObjects"})
+    isList = true
+    else
+    self.clearButtons()
+    gamePickButtonGo()
+    drawUI()
+    isList = false
+      end
+  end
 
 function clearTable()
     resetHands()
@@ -258,11 +276,11 @@ function spawnMar()
     obj = getObjectFromGUID(marFtSel)
     x = obj.takeObject({position={0.00, 1.57, -7.00}, rotation={0,0,0},smooth=false})
     x.setLock(true)
-    printToAll(" \n \n \n Select which box's Common Fate Deck\n you would like to use, by selecting\n 'Infinite Power' or 'Mischief & Malice'.\n \n If you would like to use the Mixing\n Common Fate Decks ruleset\n introduced in Mischief & Malice,\n select 'Mixed Fated Decks'. \n \n If you would like to spawn in \n all of the Fate Decks seperated, \n choose 'Fate Decks Seperated'.\n \n \n ")
+    printToAll(" \n \n \n Select which box's Common Fate Deck\n you would like to use, by selecting\n 'Infinite Power' or 'Mischief & Malice'.\n \n If you would like to use the Mixing\n Common Fate Decks ruleset\n introduced in Mischief & Malice,\n select 'Mixed Fated Decks'. \n \n If you would like to spawn in \n all of the Fate Decks separated, \n choose 'Fate Decks Separated'.\n \n \n ")
 
 end
 
-function spawnCus()
+function spawnDCus()
     spawnDis()
     setupButt = "Open Game Setup"
     setNotes("")
