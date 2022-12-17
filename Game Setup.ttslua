@@ -35,6 +35,13 @@ starAmb =Global.getVar('starAmb')
 starRef =Global.getVar('starRef')
 starInst =Global.getVar('starInst')
 starSelc =Global.getVar('starSelc')
+aniInst =Global.getVar('aniInst')
+aniPlus =Global.getVar('aniPlus')
+aniMinus =Global.getVar('aniMinus')
+aniShow =Global.getVar('aniShow')
+aniSelc =Global.getVar('aniSelc')
+aniFate =Global.getVar('aniFate')
+aniRef =Global.getVar('aniRef')
 
 disney_list = {
   {name="Despicable Plots", url="http://cloud-3.steamusercontent.com/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
@@ -69,7 +76,6 @@ customs_list = {
   {name="Dirty Money", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749048/C91D912679A30E9B24AAB87501FFF263982FFDD6/"},
   {name="From the Shadows", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749271/E4324324A8EAFA7E364DBBFAECEB8BCE3DA6109F/"},
   {name="Ham, Eggs, Spam", url="http://cloud-3.steamusercontent.com/ugc/1842530654448749457/AADCDC61420581E95B7F4BCD0CA38EE4C6C97D9B/"},
-  {name="", url=""},
   {name="Dark & Edgy", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748915/B40BCF0E8BF8E29454E93E5D6914D873A48C105C/"},
   {name="Parental Advisory", url="http://cloud-3.steamusercontent.com/ugc/1842530654448750455/35CB57E87107267D6A6D2388D07171AE9F624274/"},
   {name="Completely Expected", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748820/543231225364555FD8485D3CB5E793E63FBF9CDE/"},
@@ -77,6 +83,11 @@ customs_list = {
   {name="Chaos and Control", url="http://cloud-3.steamusercontent.com/ugc/1842530654448748718/C0C42CDBD1E5446F2C10C8859E04F445F87F8D4C/"},
   {name="Code of Conduct", url="http://cloud-3.steamusercontent.com/ugc/1840283540522674203/8C376A4ABAA3864496A70D9D8547D6410D6E903C/"},
   {name="Secret Recipe", url="http://cloud-3.steamusercontent.com/ugc/1842550789977504138/BF9913769EEEC77057CA11CFB83642B7A407DC1E/"},
+  {name="", url=""},
+}
+
+anime_list = {
+  {name="Battle Begins", url="https://cdn.discordapp.com/attachments/991989912293355540/995307942549139536/battlebeginsart.png"},
   {name="", url=""},
 }
 
@@ -116,12 +127,12 @@ function drawUI()
     self.createButton({click_function="spawnStar", function_owner=self,
         position={0,0,-4.5}, rotation={0,180,0}, width=1500, height=440,
         color={0.15,0.25,0.9}, font_size=150, tooltip=tooltip3, label="Star Wars Villainous"})
-    self.createButton({click_function="spawnDCus", function_owner=self,
+    self.createButton({click_function="listCus", function_owner=self,
         position={0,0,-5.5}, rotation={0,180,0}, width=1500, height=440,
-        color={0.625,0.125,0.9375}, font_size=150, tooltip=tooltip4, label="Custom Villains"})
+        color={0.625,0.125,0.9375}, font_size=150, tooltip=tooltip4, label="     Custom Villains  ▶"})
     self.createButton({click_function="listOpt", function_owner=self,
         position={0,0,-6.5}, rotation={0,180,0}, width=1500, height=440,
-        color={1,1,1}, font_size=150, tooltip=tooltip5, label="◀    Extra Options      "})
+        color={1,1,1}, font_size=150, tooltip=tooltip5, label="◀   Extra Options      "})
     isOpen = true
     else
     self.clearButtons()
@@ -156,7 +167,31 @@ function listOpt()
       end
   end
 
+function listCus()
+    if (isCus ~= true) then
+    self.clearButtons()
+    gamePickButtonGo()
+    drawUI()
+    local tooltip11="Disney Customs"
+    local tooltip12="Anime Villainous"
+    self.createButton({click_function="spawnDCus", function_owner=self,
+        position={-2.7,0,-4.5}, rotation={0,180,0}, width=1000, height=440,
+        color={0,.75,0}, font_size=150, tooltip=tooltip21, label="Disney\nCustoms"})
+    self.createButton({click_function="spawnAnime", function_owner=self,
+        position={-2.7,0,-5.5}, rotation={0,180,0}, width=1000, height=440,
+        color={1,0,0}, font_size=150, tooltip=tooltip22, label="Anime\nVillainous"})
+    isCus = true
+    else
+    self.clearButtons()
+    gamePickButtonGo()
+    drawUI()
+    isCus = false
+      end
+end
+
 function clearTable()
+    isCus = false
+    isList = false
     resetHands()
     local clear = getObjectFromGUID('5b9b72').getObjects()
     for k,v in pairs(clear) do
@@ -169,6 +204,7 @@ function clearTable()
 end
 
 function clearRoom()
+    isList = false
     local clear = getObjectFromGUID('7dea6b').getObjects()
     for k,v in pairs(clear) do
         v.destruct()
@@ -326,8 +362,37 @@ function spawnStar()
 
 end
 
+function spawnAnime()
+    setupButt = "Open Game Setup"
+    isCus = false
+    clearTable()
+    tableAnime()
+    obj = getObjectFromGUID(aniSelc)
+    x = obj.takeObject({rotation={0,180,0}, position={0.00, 1.67, 0.00},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(aniInst)
+    x = obj.takeObject({rotation={0,180,0}, position={30, 1.48, 0.00},smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(aniPlus)
+    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={10.74, 1.46, 1.42}, smooth=false})
+    obj = getObjectFromGUID(aniMinus)
+    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={15.09, 1.46, -1.00}, smooth=false})
+    obj = getObjectFromGUID(aniShow)
+    x = obj.takeObject({rotation={0.00, 210, 0.00}, position={12.71, 5.14, 0.62}, smooth=false})
+    obj = getObjectFromGUID(aniFate)
+    x = obj.takeObject({rotation={0.00, 180.00, 0.00}, position={10.86, 1.53, -1.94}, smooth=false})
+    die = getObjectFromGUID(infPlDc)
+    die.takeObject({position={-13.00, 2.34, 0},smooth=false})
+    obj = getObjectFromGUID(aniRef)
+    x = obj.takeObject({rotation={0,180,0}, position={-13, 1.5, 0.00}, smooth=false})
+    x.setLock(true)
+
+
+end
+
 function spawnDCus()
     spawnDis()
+    isCus = false
     setupButt = "Open Game Setup"
     setNotes("")
     self.clearButtons()
@@ -347,6 +412,7 @@ end
 
 function spawnCom()
     setupButt = "Open Game Setup"
+    isList = false
     self.clearButtons()
     gamePickButtonGo()
     local bag = getObjectFromGUID(infNineS)
@@ -401,6 +467,7 @@ end
 
 function resetHands()
     setupButt = "Open Game Setup"
+    isList = false
     self.clearButtons()
     gamePickButtonGo()
     colors = {"White","Teal","Purple","Pink","Brown","Blue","Red","Green","Yellow","Orange"}
@@ -526,6 +593,20 @@ function tableStar()
   if getObjectFromGUID('af6c71') then do
  local table_art = getObjectFromGUID('4ee1f2')
  local shuffled_urls = shuffle_table(star_list)
+ local params = table.remove(shuffled_urls)
+ table_art.setCustomObject({diffuse=params.url})
+ table_art.reload()
+ table.insert(shuffled_urls, params)
+ end
+ else do
+end
+end
+end
+
+function tableAnime()
+  if getObjectFromGUID('af6c71') then do
+ local table_art = getObjectFromGUID('4ee1f2')
+ local shuffled_urls = shuffle_table(anime_list)
  local params = table.remove(shuffled_urls)
  table_art.setCustomObject({diffuse=params.url})
  table_art.reload()
