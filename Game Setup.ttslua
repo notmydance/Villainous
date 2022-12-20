@@ -365,6 +365,7 @@ end
 function spawnAnime()
     setupButt = "Open Game Setup"
     isCus = false
+    broadcastToAll("Anime Villainous is rated 13+ for complexity and imagery\r\n")
     clearTable()
     tableAnime()
     obj = getObjectFromGUID(aniSelc)
