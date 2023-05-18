@@ -5,12 +5,15 @@ infPlDc = "e11b49"
 infCdyld = "e40d72"
 infVlnDk = "1192a6"
 infOneHr = "e6b3cd"
+preSel = "c88351"
 disVInst = "7494bb"
 disRef = "577c9d"
 disPow = "70dc21"
 disFtTk = "956149"
 dVilSelc = "9ce8f7"
 disCaud = "f45f1f"
+disStr = "fe8f3e"
+disGob = "3c721d"
 mouseBot = "e68807"
 marvInst = "5ae010"
 marRef = "914c48"
@@ -25,71 +28,28 @@ iphd = "38eb97"
 iped = "bd8a62"
 mmhd = "e58a37"
 mmed = "800f9e"
+tahd = "62284e"
+taed = "c5fc4b"
+vnhr = "a63190"
 cusSelc = "bdaf65"
 cusRef = "3f3ebe"
 cusDeck = "3e9458"
+MKspoil = "1fd37b"
 MKrcd = "5f812c"
 MKvln = "074205"
 MKft = "1c5f93"
 MKgud = "27a73a"
-
-function onLoad()
-  loadCustom()
-  loadCheese()
-  loadSetup()
-end
-
-function find_object_by_name(name)
-    for _, obj in ipairs(getAllObjects()) do
-        if obj.getName() == name then return obj end
-    end
-    return nil
-end
-
-function loadSetup()
-local SETUP = find_object_by_name("Game Setup")
-function callback(wr)
-    if wr.response_code == 200 then
-        log("Game Setup Complete")
-        SETUP.setLuaScript(wr.text)
-        SETUP = SETUP.reload()
-    else
-        log("Game Setup Incomplete")
-        log(wr.error)
-    end
-end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Game%20Setup.ttslua", callback)
-end
-
-function loadCheese()
-local CHEESE = find_object_by_name("Cheese")
-log("Trying to retrieve latest saved cheese")
-function callback(wr)
-    if wr.response_code == 200 then
-        log("Cheese Complete")
-        CHEESE.setLuaScript(wr.text)
-        CHEESE = CHEESE.reload()
-    else
-        log("Cheese Incomplete")
-        log(wr.error)
-    end
-end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Cheese.ttslua", callback)
-end
-
-function loadCustom()
-local CUSTOM = find_object_by_name("Custom Villains curated by Custom Evaluation Team")
-log("Trying to retrieve latest saved custom cheese")
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom%20Cheese.ttslua", callback)
-function callback(wr)
-    if wr.response_code == 200 then
-        log("Custom Complete")
-        CUSTOM.setLuaScript(wr.text)
-        CUSTOM = CUSTOM.reload()
-    else
-        log("Custom Incomplete")
-        log(wr.error)
-    end
-end
-WebRequest.get("https://raw.githubusercontent.com/notmydance/Villainous/main/Custom%20Cheese.ttslua", callback)
-end
+starCha = "a8a77d"
+starStr = "ae7650"
+starCrd = "4837b9"
+starAmb = "b16f0f"
+starInst = "43e572"
+starRef = "55092f"
+starSelc = "be5164"
+aniInst = "265104"
+aniPlus = "1f61dc"
+aniMinus = "63a68c"
+aniShow = "ab524a"
+aniSelc = "6b3efc"
+aniFate = "1c5744"
+aniRef = "d4bfb8"

@@ -1,135 +1,312 @@
-iphd = Global.getVar('iphd')
-iped = Global.getVar('iped')
-mmhd = Global.getVar('mmhd')
-mmed = Global.getVar('mmed')
+local iphd = {Global.getVar('iphd'),true,string.char(10004)}
+local iped = {Global.getVar('iped'),true,string.char(10004)}
+local mmhd = {Global.getVar('mmhd'),false,""}
+local mmed = {Global.getVar('mmed'),false,""}
+local tahd = {Global.getVar('tahd'),false,""}
+local taed = {Global.getVar('taed'),false,""}
+local vnhr = {Global.getVar('vnhr'),false,""}
+
 
 function onLoad()
-    mixedButtParams = {
-        click_function = 'marFateSetupMixed',
-        function_owner = self,
-        rotation = {0, 180, 0},
-        position = {0, 0.5, 0},
-        width = 950,
-        height = 550,
-	color = {1,0.25,0.25},
-	font_size = 200,
-        label = 'Mixed  \nFate Decks',
-        tooltip = 'Mixed Fate Decks'
-    }
-    ipButtParams = {
-        click_function = 'marFateSetupIP',
-        function_owner = self,
-        rotation = {0, 180, 0},
-        position = {-2, 0.25, 0},
-        width = 1000,
-        height = 550,
-	color = {1,1,0},
-	font_size = 200,
-        label = 'Infinite \nPower',
-        tooltip = 'Infinite Power'
-    }
-    mmButtParams = {
-        click_function = 'marFateSetupMM',
-        function_owner = self,
-        rotation = {0, 180, 0},
-        position = {2, 0.25, 0},
-        width = 1000,
-        height = 550,
-	color = {0,.75,0},
-	font_size = 200,
-        label = 'Mischief \n& Malice',
-        tooltip = 'Mischief & Malice'
-    }
-    allButtParams = {
-        click_function = 'marFateSetupAll',
-        function_owner = self,
-        rotation = {0, 180, 0},
-        position = {0, 0.25, -1.1},
-        width = 1000,
-        height = 550,
-	color = {1,1,1},
-	font_size = 200,
-        label = 'Fate Decks\nSeperated',
-        tooltip = 'Fate Decks Seperated'
-    }
-    self.createButton(mixedButtParams)
-    self.createButton(ipButtParams)
-    self.createButton(mmButtParams)
-    self.createButton(allButtParams)
+    drawUI()
 end
 
-function marFateSetupMixed()
-    obj1 = getObjectFromGUID(iphd)
-    x1 = obj1.takeObject({rotation={0,180,180}, 
-        position={-4.5, 1.6, 7},smooth=false})
-    obj2 = getObjectFromGUID(mmhd)
-    x2 = obj2.takeObject({rotation={0,180,180}, 
-        position={-1.5, 1.6, 7},smooth=false})
-    allH = x1.putObject(x2)
+function drawUI()
+    self.clearButtons()
+
+    self.createButton({
+        label=iphd[3], click_function="toggleIPHero",
+        function_owner=self, tooltip="11 Heroes will be chosen randomly from any selected Marvel Villainous Common Fate Heroes and shuffled into a Common Fate deck.",
+        position={0.9,0.05,1.75}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Infinite Power\n Heroes             ", click_function="none",
+        position={3.1,0.05,1.77}, height=0, width=0, font_size=250, font_color={1,0.74,0}
+    })
+    self.createButton({
+        label=mmhd[3], click_function="toggleMMHero",
+        function_owner=self, tooltip="11 Heroes will be chosen randomly from any selected Marvel Villainous Common Fate Heroes and shuffled into a Common Fate deck.",
+        position={0.9,0.05,3}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Mischief & Malice\n Heroes                  ", click_function="none",
+        position={3.45,0.05,3.02}, height=0, width=0, font_size=250, font_color={0.44,0.85,0}
+    })
+    self.createButton({
+        label=tahd[3], click_function="toggleTAHero",
+        function_owner=self, tooltip="11 Heroes will be chosen randomly from any selected Marvel Villainous Common Fate Heroes and shuffled into a Common Fate deck.",
+        position={0.9,0.05,4.25}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Twisted Ambitions\n Heroes                    ", click_function="none",
+        position={3.58,0.05,4.27}, height=0, width=0, font_size=250, font_color={0.8,0.88,0.1}
+    })
+    self.createButton({
+        label=iped[3], click_function="toggleIPEvent",
+        function_owner=self, tooltip="4 Events will be chosen randomly from any selected Marvel Villainous Common Fate Events and shuffled into a Common Fate deck.",
+        position={-4.5,0.05,1.75}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Infinite Power\n Events              ", click_function="none",
+        position={-2.25,0.05,1.77}, height=0, width=0, font_size=250, font_color={1,0.74,0}
+    })
+    self.createButton({
+        label=mmed[3], click_function="toggleMMEvent",
+        function_owner=self, tooltip="4 Events will be chosen randomly from any selected Marvel Villainous Common Fate Events and shuffled into a Common Fate deck.",
+        position={-4.5,0.05,3}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Mischief & Malice\n Events                   ", click_function="none",
+        position={-1.95,0.05,3.02}, height=0, width=0, font_size=250, font_color={0.44,0.85,0.}
+    })
+    self.createButton({
+        label=taed[3], click_function="toggleTAEvent",
+        function_owner=self, tooltip="4 Events will be chosen randomly from any selected Marvel Villainous Common Fate Events and shuffled into a Common Fate deck.",
+        position={-4.5,0.05,4.25}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Twisted Ambitions\n Events                     ", click_function="none",
+        position={-1.85,0.05,4.27}, height=0, width=0, font_size=250, font_color={0.8,0.88,0.1}
+    })
+    self.createButton({
+        label=vnhr[3], click_function="toggleVNHero",
+        function_owner=self, tooltip="If selected, a random Hero will be removed from the Common Fate deck and the Venom Hero card will replace it.",
+        position={-2.5,0.05,5.5}, height=500, width=500, font_size=450,
+    })
+    self.createButton({
+        label="Venom, Symbiote\n Hero Card              ", click_function="none",
+        position={0.1,0.05,5.57}, height=0, width=0, font_size=250, font_color={0,0.537,1}
+    })
+    self.createButton({click_function="setupDeckMaster", function_owner=self,
+        position={0,0.15,0}, rotation={0,0,0}, width=1600, height=1000,
+        color={1,0.25,0.25}, font_size=450, tooltip="If you wish to mix Common Fate decks per the rules of page 19 of any Marvel Villainous Expandalone, select the options to be shuffled together, then press this button.\nIf you do not wish to mix Common Fate decks, select only the options from the box you wish to play with, then press this button.", label="Create\nDeck"})
+
+end
+
+function toggleIPHero()
+    if iphd[2] == false then
+        iphd[2] = true
+        iphd[3] = string.char(10004)
+        drawUI()
+    else
+        iphd[2] = false
+        iphd[3] = ""
+        drawUI()
+    end
+end
+
+function toggleIPEvent()
+    if iped[2] == false then
+        iped[2] = true
+        iped[3] = string.char(10004)
+        drawUI()
+    else
+        iped[2] = false
+        iped[3] = ""
+        drawUI()
+    end
+end
+
+function toggleMMHero()
+    if mmhd[2] == false then
+        mmhd[2] = true
+        mmhd[3] = string.char(10004)
+        drawUI()
+    else
+        mmhd[2] = false
+        mmhd[3] = ""
+        drawUI()
+    end
+end
+
+function toggleMMEvent()
+    if mmed[2] == false then
+        mmed[2] = true
+        mmed[3] = string.char(10004)
+        drawUI()
+    else
+        mmed[2] = false
+        mmed[3] = ""
+        drawUI()
+    end
+end
+
+function toggleTAHero()
+    if tahd[2] == false then
+        tahd[2] = true
+        tahd[3] = string.char(10004)
+        drawUI()
+    else
+        tahd[2] = false
+        tahd[3] = ""
+        drawUI()
+    end
+end
+
+function toggleTAEvent()
+    if taed[2] == false then
+        taed[2] = true
+        taed[3] = string.char(10004)
+        drawUI()
+    else
+        taed[2] = false
+        taed[3] = ""
+        drawUI()
+    end
+end
+
+function toggleVNHero()
+    if vnhr[2] == false then
+        vnhr[2] = true
+        vnhr[3] = string.char(10004)
+        drawUI()
+    else
+        vnhr[2] = false
+        vnhr[3] = ""
+        drawUI()
+    end
+end
+
+function setupDeckMaster()
+    finalH = setupHeroDeck()
+    if vnhr[2] == true then
+        wasted = finalH.takeObject()
+        Wait.frames(
+            function()
+                wasted.destruct()
+            end, 1
+        )
+        ven = getObjectFromGUID(vnhr[1]).takeObject({rotation={0,180,180},position={-7.5, 1.6, 7},smooth=false})
+        finalH = ven.putObject(finalH)
+    end
+    finalE = setupEventDeck()
+    if finalE then
+        finalD = finalH.putObject(finalE)
+    else
+        finalD = finalH
+    end
+    finalD.setName("Common Fate Deck")
+    finalD.rotate({0,-90,0})
+    finalD.shuffle()
+    self.destruct()
+end
+
+function setupHeroDeck()
+    local counter = 0
+    local firstOn = ""
+    if iphd[2] == true then
+        counter = counter + 1
+        obj1 = getObjectFromGUID(iphd[1])
+        x1 = obj1.takeObject({rotation={0,180,180},position={-4.5, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x1
+        else
+            x1.putObject(firstOn)
+            firstOn = x1
+        end
+    end
+    if mmhd[2] == true then
+        counter = counter + 1
+        obj2 = getObjectFromGUID(mmhd[1])
+        x2 = obj2.takeObject({rotation={0,180,180},position={-1.5, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x2
+        else
+            x2.putObject(firstOn)
+            firstOn = x2
+        end
+    end
+    if tahd[2] == true then
+        counter = counter + 1
+        obj3 = getObjectFromGUID(tahd[1])
+        x3 = obj3.takeObject({rotation={0,180,180},position={2, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x3
+        else
+            x3.putObject(firstOn)
+            firstOn = x3
+        end
+    end
+    allH = firstOn
     allH.shuffle()
-    newH = allH.split(2)
-    obj3 = getObjectFromGUID(iped)
-    x3 = obj3.takeObject({rotation={0,180,180}, 
-        position={1.5, 1.6, 7},smooth=false})
-    obj4 = getObjectFromGUID(mmed)
-    x4 = obj4.takeObject({rotation={0,180,180}, 
-        position={4.5, 1.6, 7},smooth=false})
-    allE = x3.putObject(x4)
-    allE.shuffle()
-    newE = allE.split(2)
-    Wait.frames(
-        function()
-            newH[1].destruct()
-            newE[1].destruct()
-        end, 1
-    )
-    newD = newH[2].putObject(newE[2])
-    newD.shuffle()
-    newD.setPosition({0.00, 1.57, -8.00})
-    newD.setName('Common Fate Deck')
-    self.destruct()
+    if counter > 1 then
+        newH = allH.cut(11)
+        Wait.frames(
+            function()
+                newH[1].destruct()
+            end, 1
+        )
+        allH = newH[2]
+    else
+        allH = firstOn
+    end
+    allH.setPosition({0.00, 1.57, -11.00})
+    return allH
 end
 
-function marFateSetupIP()
-    obj1 = getObjectFromGUID(iphd)
-    x1 = obj1.takeObject({rotation={0,180,180}, 
-        position={-4.5, 1.6, 7},smooth=false})
-    obj2 = getObjectFromGUID(iped)
-    x2 = obj2.takeObject({rotation={0,180,180}, 
-        position={1.5, 1.6, 7},smooth=false})
-    newD = x1.putObject(x2)
-    newD.shuffle()
-    newD.setPosition({0.00, 1.57, -8.00})
-    newD.setName('Common Fate Deck')
-    self.destruct()
+function setupEventDeck()
+    local counter = 0
+    local firstOn = ""
+    if iped[2] == true then
+        counter = counter + 1
+        obj1 = getObjectFromGUID(iped[1])
+        x1 = obj1.takeObject({rotation={0,180,180},position={-4.5, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x1
+        else
+            x1.putObject(firstOn)
+            firstOn = x1
+        end
+    end
+    if mmed[2] == true then
+        counter = counter + 1
+        obj2 = getObjectFromGUID(mmed[1])
+        x2 = obj2.takeObject({rotation={0,180,180},position={-1.5, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x2
+        else
+            x2.putObject(firstOn)
+            firstOn = x2
+        end
+    end
+    if taed[2] == true then
+        counter = counter + 1
+        obj3 = getObjectFromGUID(taed[1])
+        x3 = obj3.takeObject({rotation={0,180,180},position={2, 1.6, 7},smooth=false})
+        if firstOn == "" then
+            firstOn = x3
+        else
+            x3.putObject(firstOn)
+            firstOn = x3
+        end
+    end
+    if counter > 0 then
+        allE = firstOn
+        allE.shuffle()
+        if counter > 1 then
+            newE = allE.cut(4)
+            Wait.frames(
+                function()
+                    newE[1].destruct()
+                end, 1
+            )
+            allE = newE[2]
+        end
+        allE.setPosition({3.00, 1.57, -11.00})
+        return allE
+    end
 end
 
-function marFateSetupMM()
-    obj1 = getObjectFromGUID(mmhd)
-    x1 = obj1.takeObject({rotation={0,180,180}, 
-        position={-1.5, 1.6, 7},smooth=false})
-    obj2 = getObjectFromGUID(mmed)
-    x2 = obj2.takeObject({rotation={0,180,180}, 
-        position={4.5, 1.6, 7},smooth=false})
-    newD = x1.putObject(x2)
-    newD.shuffle()
-    newD.setPosition({0.00, 1.57, -8.00})
-    newD.setName('Common Fate Deck')
-    self.destruct()
+function findObjectByName(name)
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == name then return true end
+    end
+    return false
 end
 
-function marFateSetupAll()
-    obj1 = getObjectFromGUID(iphd)
-    x1 = obj1.takeObject({rotation={0,180,180}, 
-        position={-4.5, 1.6, 7},smooth=false})
-    obj2 = getObjectFromGUID(mmhd)
-    x2 = obj2.takeObject({rotation={0,180,180}, 
-        position={-1.5, 1.6, 7},smooth=false})
-    obj3 = getObjectFromGUID(iped)
-    x3 = obj3.takeObject({rotation={0,180,180}, 
-        position={1.5, 1.6, 7},smooth=false})
-    obj4 = getObjectFromGUID(mmed)
-    x4 = obj4.takeObject({rotation={0,180,180}, 
-        position={4.5, 1.6, 7},smooth=false})
-    self.destruct()
+function getObjectByName(name)
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == name then return obj end
+    end
+    return false
 end

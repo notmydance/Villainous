@@ -8,6 +8,7 @@ infCnn =Global.getVar('infCnn')
 infPlDc =Global.getVar('infPlDc')
 infVlnDk =Global.getVar('infVlnDk')
 infOneHr =Global.getVar('infOneHr')
+preSel =Global.getVar('preSel')
 disVInst =Global.getVar('disVInst')
 disRef =Global.getVar('disRef')
 disPow =Global.getVar('disPow')
@@ -57,10 +58,13 @@ marvel_list = {
   {name="Infinite Power", url="http://cloud-3.steamusercontent.com/ugc/1782840181541271301/A521640864CE3E63FDED319BB3FDEED87AA888F1/"},
   {name="Mischief Malice", url="http://cloud-3.steamusercontent.com/ugc/1782840181541272717/7F11C72D4333D9DC3448D0C1D16FE73AFEFECFA5/"},
   {name="We are Venom", url="http://cloud-3.steamusercontent.com/ugc/1793018747653914063/3676A136250B7491571CD87D3919F3ECA4264A84/"},
+  {name="Twisted Ambitions", url="http://cloud-3.steamusercontent.com/ugc/1793018747653914063/3676A136250B7491571CD87D3919F3ECA4264A84/"},
+  {name="", url=""},
 }
 
 star_list = {
   {name="Power of the Dark Side", url="http://cloud-3.steamusercontent.com/ugc/1822276928233573514/A35DB28D338CAB1936C0A84FAF6F107F93B496D4/"},
+  {name="Scum and Villainy", url="http://cloud-3.steamusercontent.com/ugc/1822276928233573514/A35DB28D338CAB1936C0A84FAF6F107F93B496D4/"},
   {name="", url=""},
 }
 
@@ -149,15 +153,19 @@ function listOpt()
     local tooltip21="Spawn Competitive Assets"
     local tooltip22="Reset Hands"
     local tooltip23="Reduce Objects"
+    local tooltip24="Selector Presets"
     self.createButton({click_function="spawnCom", function_owner=self,
-        position={2.7,0,-4.5}, rotation={0,180,0}, width=1000, height=440,
+        position={2.7,0,-3.5}, rotation={0,180,0}, width=1000, height=440,
         color={0,1,1}, font_size=150, tooltip=tooltip21, label="Competitive\nAssets"})
     self.createButton({click_function="resetHands", function_owner=self,
-        position={2.7,0,-5.5}, rotation={0,180,0}, width=1000, height=440,
+        position={2.7,0,-4.5}, rotation={0,180,0}, width=1000, height=440,
         color={1,0,0}, font_size=150, tooltip=tooltip22, label="Reset\nHands"})
     self.createButton({click_function="clearRoom", function_owner=self,
-        position={2.7,0,-6.5}, rotation={0,180,0}, width=1000, height=440,
+        position={2.7,0,-5.5}, rotation={0,180,0}, width=1000, height=440,
         color={1,0.5,0}, font_size=150, tooltip=tooltip23, label="Reduce\nObjects"})
+    self.createButton({click_function="preSelect", function_owner=self,
+        position={2.7,0,-6.5}, rotation={0,180,0}, width=1000, height=440,
+        color={0.95703125,0.4375,0.8046875}, font_size=150, tooltip=tooltip24, label="Selector\nPresets"})
     isList = true
     else
     self.clearButtons()
@@ -300,32 +308,31 @@ function spawnMar()
     x = obj.takeObject({position={0,1.55,0},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(marVInst)
-    x = obj.takeObject({position={19,1.48,0},smooth=false})
+    x = obj.takeObject({rotation={0,270,0},position={45,1.48,0},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(marRef)
-    x = obj.takeObject({rotation={0,90,0},position={30,1.48,0},smooth=false})
+    x = obj.takeObject({rotation={0,270,0},position={36,1.48,0},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(marPow)
-    x = obj.takeObject({position={8.09, 3.56, 0.17},rotation={353.74, 185.05, 173.10},smooth=false})
+    x = obj.takeObject({position={9.29, 3.56, 0.17},rotation={353.74, 185.05, 173.10},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(marVaul)
-    x = obj.takeObject({position={8.5,1.28,0},smooth=false})
+    x = obj.takeObject({position={9.7,1.28,0},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(maStrTk)
-    x = obj.takeObject({position={-8.18, 3.2, -0.72},rotation={7.25, 183.42, 173.09},smooth=false})
+    x = obj.takeObject({position={-9.28, 3.2, -0.72},rotation={7.25, 183.42, 173.09},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(marStVa)
-    x = obj.takeObject({position={-8.5,1.28,0},rotation={0,270,0},smooth=false})
+    x = obj.takeObject({position={-9.7,1.28,0},rotation={0,270,0},smooth=false})
     x.setLock(true)
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={19,2.54,3},smooth=false})
+    die.takeObject({position={27.5,2.15,0},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,180,0},
-    position={19, 1.69, -2}, smooth=false})
+    x = obj.takeObject({rotation={0,270,0},position={31, 1.49,0}, smooth=false})
     obj = getObjectFromGUID(marFtSel)
-    x = obj.takeObject({position={0.00, 1.57, -7.00}, rotation={0,0,0},smooth=false})
+    x = obj.takeObject({position={0.00, 1.48, -5.30}, rotation={0,180,0},smooth=false})
     x.setLock(true)
-    printToAll(" \n \n \n Select which box's Common Fate Deck\n you would like to use, by selecting\n 'Infinite Power' or 'Mischief & Malice'.\n \n If you would like to use the Mixing\n Common Fate Decks ruleset\n introduced in Mischief & Malice,\n select 'Mixed Fated Decks'. \n \n If you would like to spawn in \n all of the Fate Decks separated, \n choose 'Fate Decks Separated'.\n \n \n ")
+    printToAll(" \n \n \n Select which boxes' Common Fate Decks\n you would like to use, by selecting the\n respective Heroes and maybe Events desired.\n \n When Venom's Hero card is selected, he \n will always be included in the Fate deck.\n \n")
 
 end
 
@@ -352,9 +359,9 @@ function spawnStar()
     x = obj.takeObject({position={17.27, 1.30, 0.12},smooth=false})
     x.setLock(true)
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={35.00, 2.34, 0.95},smooth=false})
+    die.takeObject({position={35.00, 2.34, 0},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,270,0}, position={39.00, 1.68, 0.95}, smooth=false})
+    x = obj.takeObject({rotation={0,270,0}, position={39.00, 1.68, 0}, smooth=false})
     obj = getObjectFromGUID(starRef)
     x = obj.takeObject({rotation={0,270,0}, position={26, 1.5, 0.00}, smooth=false})
     x.setLock(true)
@@ -472,22 +479,33 @@ function resetHands()
     self.clearButtons()
     gamePickButtonGo()
     colors = {"White","Teal","Purple","Pink","Brown","Blue","Red","Green","Yellow","Orange"}
-    Player['Orange'].setHandTransform({position={-23.67,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
-    Player['Teal'].setHandTransform({position={0,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
-    Player['Pink'].setHandTransform({position={23.67,3.35,-34.43},scale={15.33,11.90,6.35},rotation={0,0,0}})
-    Player['Purple'].setHandTransform({position={51.64,3.35,-11.73},scale={15.33,11.90,6.35},rotation={0,270,0}})
-    Player['Brown'].setHandTransform({position={51.64,3.35,11.73},scale={15.33,11.90,6.35},rotation={0,270,0}})
-    Player['Blue'].setHandTransform({position={23.67,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
-    Player['Red'].setHandTransform({position={0,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
-    Player['Green'].setHandTransform({position={-23.67,3.35,34.43},scale={15.33,11.90,6.35},rotation={0,180,0}})
-    Player['Yellow'].setHandTransform({position={-51.64,3.35,11.73},scale={15.33,11.90,6.35},rotation={0,90,0}})
-    Player['White'].setHandTransform({position={-51.64,3.35,-11.73},scale={15.33,11.90,6.35},rotation={0,90,0}})
+    Player['White'].setHandTransform({position={-30.00, 4.00, -38.00},scale={15.00, 8.00, 5.00},rotation={0,0,0}})
+    Player['Teal'].setHandTransform({position={0.00, 4.00, -38.00},scale={15.00, 8.00, 5.00},rotation={0,0,0}})
+    Player['Pink'].setHandTransform({position={30.00, 4.00, -38.00},scale={15.00, 8.00, 5.00},rotation={0,0,0}})
+    Player['Purple'].setHandTransform({position={57.50, 4.00, -14.00},scale={15.00, 8.00, 5.00},rotation={0,270,0}})
+    Player['Brown'].setHandTransform({position={57.50, 4.00, 14.00},scale={15.00, 8.00, 5.00},rotation={0,270,0}})
+    Player['Blue'].setHandTransform({position={30.00, 4.00, 38.00},scale={15.00, 8.00, 5.00},rotation={0,180,0}})
+    Player['Red'].setHandTransform({position={0.00, 4.00, 38.00},scale={15.00, 8.00, 5.00},rotation={0,180,0}})
+    Player['Green'].setHandTransform({position={-30.00, 4.00, 38.00},scale={15.00, 8.00, 5.00},rotation={0,180,0}})
+    Player['Yellow'].setHandTransform({position={-57.50, 4.00, 14.00},scale={15.00, 8.00, 5.00},rotation={0,90,0}})
+    Player['Orange'].setHandTransform({position={-57.50, 4.00, -14.00},scale={15.00, 8.00, 5.00},rotation={0,90,0}})
     for _,x in pairs(colors) do
         y = Player[x].getHandObjects()
         for _,z in ipairs(y) do
             z.destruct()
         end
     end
+end
+
+
+function preSelect()
+    setupButt = "Open Game Setup"
+    isList = false
+    self.clearButtons()
+    gamePickButtonGo()
+    local bag = getObjectFromGUID(preSel)
+    bag.takeObject({rotation={0,0,0},
+    position={0.00, 1.57, 7.00},smooth=false})
 end
 
 

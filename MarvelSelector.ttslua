@@ -1,19 +1,23 @@
 --[[
- Villain Selector Marvel: 
+ Villain Selector Marvel:
  --]]
- 
+
  buttons = {}
- buttons["Hela"] = {click_function = "selectHela", function_owner = self, label = "Hela", position = {-1.7, 0, -0.79}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, tooltip = "Hela"}
- buttons["Killmonger"] = {click_function = "selectKillmonger", function_owner = self, label = "Killmonger", position = {-0.57, 0, -0.79}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Killmonger"}
- buttons["Loki"] = {click_function = "selectLoki", function_owner = self, label = "Loki", position = {0.57, 0, -0.79}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Loki"}
- buttons["Madame Masque"] = {click_function = "selectMadame Masque", function_owner = self, label = "Madame Masque", position = {1.7, 0, -0.79}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Madame Masque"}
- buttons["M.O.D.O.K."] = {click_function = "selectM.O.D.O.K.", function_owner = self, label = "M.O.D.O.K.", position = {-1.7, 0, 0.77}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, tooltip = "M.O.D.O.K."}
- buttons["Taskmaster"] = {click_function = "selectTaskmaster", function_owner = self, label = "Taskmaster", position = {-0.57, 0, 0.77}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Taskmaster"}
- buttons["Thanos"] = {click_function = "selectThanos", function_owner = self, label = "Thanos", position = {0.57, 0, 0.77}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Thanos"}
- buttons["Ultron"] = {click_function = "selectUltron", function_owner = self, label = "Ultron", position = {1.7, 0, 0.77}, scale = {0.27, 0.2, 1.97}, width = 2000, height = 400, font_size = 1, tooltip = "Ultron"}
- 
- pwrJson=[[{"GUID": "55729e", "Name": "Custom_Token", "Transform": {"posX": -30.7490387, "posY": 41.9029045, "posZ": 203.05275, "rotX": 8.860523E-05, "rotY": 359.9963, "rotZ": -0.0002133366, "scaleX": 0.387030065, "scaleY": 1.0, "scaleZ": 0.387030065 }, "Nickname": "Temp Power", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1.0, "g": 1.0, "b": 1.0 }, "LayoutGroupSortIndex": 0, "Value": 0, "Locked": true, "Grid": true, "Snap": true, "IgnoreFoW": false, "MeasureMovement": false, "DragSelectable": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "HideWhenFaceDown": false, "Hands": false, "CustomImage": {"ImageURL": "http://cloud-3.steamusercontent.com/ugc/1760320644485479981/BE85B5B329139BA3449E5826CEACBC327C5ED40D/", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0, "CustomToken": {"Thickness": 0.1, "MergeDistancePixels": 15.0, "StandUp": false, "Stackable": true } }, "LuaScript": "CONFIG = {\n    MIN_VALUE = -99,\n    MAX_VALUE = 999,\n    FONT_COLOR = {0,0,0,95},\n    FONT_SIZE = 600,\n    COLOR_HEX = \"#000000\",\n    TOOLTIP_SHOW = true,\n    VALUE = 0,\n    CONTEXT_FIVE = true,\n    CONTEXT_TEN = true,\n    NUMBER_TYPED = true,\n}\nINJECTED_COUNTER = true\n\n\nfunction onload(saved_data)\n    if saved_data ~= \"\" then\n        local loaded_data = JSON.decode(saved_data)\n        CONFIG = loaded_data\n    end\n    if CONFIG.CONTEXT_FIVE then\n        self.addContextMenuItem(\"+5\", add_5, true)\n        self.addContextMenuItem(\"-5\", sub_5, true)\n    end\n    if CONFIG.CONTEXT_TEN then\n        self.addContextMenuItem(\"+10\", add_10, true)\n        self.addContextMenuItem(\"-10\", sub_10, true)\n    end\n    if CONFIG.NUMBER_TYPED then\n        self.max_typed_number = CONFIG.MAX_VALUE\n    end\n    createAll()\nend\n\nfunction onNumberTyped(player_color, number_typed)\n    new_value = math.min(math.max(number_typed, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)\n    if CONFIG.VALUE ~= new_value then\n        CONFIG.VALUE = new_value\n        updateVal()\n        updateSave()\n    end\nend\n\nfunction add_10()\n    for x=1, 10 do\n        add_subtract(nil, nil, false)\n    end\nend\nfunction add_5()\n    for x=1, 5 do\n        add_subtract(nil, nil, false)\n    end\nend\n\nfunction sub_5()\n    for x=1, 5 do\n        add_subtract(nil, nil, true)\n    end\nend\nfunction sub_10()\n    for x=1, 10 do\n        add_subtract(nil, nil, true)\n    end\nend\n\nfunction updateSave()\n    saved_data = JSON.encode(CONFIG)\n    self.script_state = saved_data\nend\n\nfunction createAll()\n    if CONFIG.TOOLTIP_SHOW then\n        ttText = self.getName().. \": \" .. CONFIG.VALUE\n    else\n        ttText = self.getName()\n    end\n    local scale = {x=1.5, y=1.5, z=1.5}\n    local thickness = self.getBoundsNormalized().size.y\n    if self.name == \"Custom_Tile\" then\n        thickness = thickness*2\n        scale = {0.75, 0.75, 0.75}\n    end\n    self.createButton({\n      label=tostring(CONFIG.VALUE),\n      click_function=\"add_subtract\",\n      tooltip=ttText,\n      function_owner=self,\n      position={0, thickness/2, -0.2},\n      height=600,\n      width=1000,\n      alignment = 3,\n      scale=scale,\n      font_size=CONFIG.FONT_SIZE,\n      font_color=CONFIG.FONT_COLOR,\n      color={0,0,0,0}\n      })\n\n    self.createInput({\n        value = self.getName(),\n        input_function = \"editName\",\n        tooltip=ttText,\n        label = \"\",\n        function_owner = self,\n        alignment = 3,\n        position = {0,thickness/2,1.7},\n        width = 1200,\n        height = 1000,\n        font_size = CONFIG.FONT_SIZE/3,\n        scale={x=1, y=1, z=1},\n        font_color= CONFIG.FONT_COLOR,\n        color = {0,0,0,0}\n        })\n\n    setTooltips()\nend\n\nfunction editName(_obj, _string, value)\n    self.setName(value)\n    setTooltips()\nend\n\nfunction add_subtract(_obj, _color, alt_click)\n    mod = alt_click and -1 or 1\n    new_value = math.min(math.max(CONFIG.VALUE + mod, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)\n    if CONFIG.VALUE ~= new_value then\n        CONFIG.VALUE = new_value\n        updateVal()\n        updateSave()\n    end\nend\n\nfunction updateVal()\n    self.editButton({\n        index = 0,\n        label = tostring(CONFIG.VALUE)\n        })\n    setTooltips()\nend\n\nfunction setTooltips()\n    if CONFIG.TOOLTIP_SHOW then\n        ttText = self.getName().. \": \" .. CONFIG.VALUE\n    else\n        ttText = self.getName()\n    end\n\n    self.editInput({\n        index = 0,\n        value = self.getName(),\n        tooltip = ttText\n        })\n    self.editButton({\n        index = 0,\n        value = tostring(CONFIG.VALUE),\n        tooltip = ttText\n        })\nend\n", "LuaScriptState": "{\"COLOR_HEX\":\"#FFFFFF\",\"CONTEXT_FIVE\":true,\"CONTEXT_TEN\":true,\"FONT_COLOR\":[1,1,1,95],\"FONT_SIZE\":600,\"MAX_VALUE\":100,\"MIN_VALUE\":0,\"NUMBER_TYPED\":true,\"TOOLTIP_SHOW\":true,\"VALUE\":0}", "XmlUI": ""}]]
- 
+ buttons["Doctor Octopus"] = {click_function = "selectDoctor Octopus", function_owner = self, label = "Doctor Octopus", position = {-2.3, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Doctor Octopus"}
+ buttons["Hela"] = {click_function = "selectHela", function_owner = self, label = "Hela", position = {-1.38, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Hela"}
+ buttons["Kang the Conqueror"] = {click_function = "selectKang the Conqueror", function_owner = self, label = "Kang the Conqueror", position = {-0.46, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Kang the Conqueror"}
+ buttons["Killmonger"] = {click_function = "selectKillmonger", function_owner = self, label = "Killmonger", position = {0.46, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Killmonger"}
+ buttons["Loki"] = {click_function = "selectLoki", function_owner = self, label = "Loki", position = {1.38, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Loki"}
+ buttons["Madame Masque"] = {click_function = "selectMadame Masque", function_owner = self, label = "Madame Masque", position = {2.3, 0, -0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Madame Masque"}
+ buttons["M.O.D.O.K."] = {click_function = "selectM.O.D.O.K.", function_owner = self, label = "M.O.D.O.K.", position = {-2.3, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "M.O.D.O.K."}
+ buttons["Taskmaster"] = {click_function = "selectTaskmaster", function_owner = self, label = "Taskmaster", position = {-1.38, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Taskmaster"}
+ buttons["Thanos"] = {click_function = "selectThanos", function_owner = self, label = "Thanos", position = {-0.46, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Thanos"}
+ buttons["Titania"] = {click_function = "selectTitania", function_owner = self, label = "Titania", position = {0.46, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Titania"}
+ buttons["Ultron"] = {click_function = "selectUltron", function_owner = self, label = "Ultron", position = {1.38, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Ultron"}
+ buttons["Venom"] = {click_function = "selectVenom", function_owner = self, label = "Venom", position = {2.3, 0, 0.64}, scale = {0.22, 0, 1.57}, width = 2000, height = 400, tooltip = "Venom"}
+
+ pwrJson=[[{"GUID": "55729e", "Name": "Custom_Token", "Transform": {"posX": -30.7490387, "posY": 41.9029045, "posZ": 203.05275, "rotX": 8.860523E-05, "rotY": 359.9963, "rotZ": -0.0002133366, "scaleX": 0.387030065, "scaleY": 1.0, "scaleZ": 0.387030065 }, "Nickname": "Temp Power", "Description": "", "GMNotes": "", "ColorDiffuse": {"r": 1.0, "g": 1.0, "b": 1.0 }, "LayoutGroupSortIndex": 0, "Value": 0, "Locked": true, "Grid": true, "Snap": true, "IgnoreFoW": false, "MeasureMovement": false, "DragSelectable": true, "Autoraise": true, "Sticky": true, "Tooltip": true, "GridProjection": false, "HideWhenFaceDown": false, "Hands": false, "CustomImage": {"ImageURL": "http://cloud-3.steamusercontent.com/ugc/1827904196286081297/5987718F3B1E68E2E960316BA714AC10202A50E0/", "ImageSecondaryURL": "", "ImageScalar": 1.0, "WidthScale": 0.0, "CustomToken": {"Thickness": 0.1, "MergeDistancePixels": 15.0, "StandUp": false, "Stackable": true } }, "LuaScript": "CONFIG = {\n    MIN_VALUE = -99,\n    MAX_VALUE = 999,\n    FONT_COLOR = {0,0,0,95},\n    FONT_SIZE = 600,\n    COLOR_HEX = \"#000000\",\n    TOOLTIP_SHOW = true,\n    VALUE = 0,\n    CONTEXT_FIVE = true,\n    CONTEXT_TEN = true,\n    NUMBER_TYPED = true,\n}\nINJECTED_COUNTER = true\n\n\nfunction onload(saved_data)\n    if saved_data ~= \"\" then\n        local loaded_data = JSON.decode(saved_data)\n        CONFIG = loaded_data\n    end\n    if CONFIG.CONTEXT_FIVE then\n        self.addContextMenuItem(\"+5\", add_5, true)\n        self.addContextMenuItem(\"-5\", sub_5, true)\n    end\n    if CONFIG.CONTEXT_TEN then\n        self.addContextMenuItem(\"+10\", add_10, true)\n        self.addContextMenuItem(\"-10\", sub_10, true)\n    end\n    if CONFIG.NUMBER_TYPED then\n        self.max_typed_number = CONFIG.MAX_VALUE\n    end\n    createAll()\nend\n\nfunction onNumberTyped(player_color, number_typed)\n    new_value = math.min(math.max(number_typed, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)\n    if CONFIG.VALUE ~= new_value then\n        CONFIG.VALUE = new_value\n        updateVal()\n        updateSave()\n    end\nend\n\nfunction add_10()\n    for x=1, 10 do\n        add_subtract(nil, nil, false)\n    end\nend\nfunction add_5()\n    for x=1, 5 do\n        add_subtract(nil, nil, false)\n    end\nend\n\nfunction sub_5()\n    for x=1, 5 do\n        add_subtract(nil, nil, true)\n    end\nend\nfunction sub_10()\n    for x=1, 10 do\n        add_subtract(nil, nil, true)\n    end\nend\n\nfunction updateSave()\n    saved_data = JSON.encode(CONFIG)\n    self.script_state = saved_data\nend\n\nfunction createAll()\n    if CONFIG.TOOLTIP_SHOW then\n        ttText = self.getName().. \": \" .. CONFIG.VALUE\n    else\n        ttText = self.getName()\n    end\n    local scale = {x=1.5, y=1.5, z=1.5}\n    local thickness = self.getBoundsNormalized().size.y\n    if self.name == \"Custom_Tile\" then\n        thickness = thickness*2\n        scale = {0.75, 0.75, 0.75}\n    end\n    self.createButton({\n      label=tostring(CONFIG.VALUE),\n      click_function=\"add_subtract\",\n      tooltip=ttText,\n      function_owner=self,\n      position={0, thickness/2, -0.2},\n      height=600,\n      width=1000,\n      alignment = 3,\n      scale=scale,\n      font_size=CONFIG.FONT_SIZE,\n      font_color=CONFIG.FONT_COLOR,\n      color={0,0,0,0}\n      })\n\n    self.createInput({\n        value = self.getName(),\n        input_function = \"editName\",\n        tooltip=ttText,\n        label = \"\",\n        function_owner = self,\n        alignment = 3,\n        position = {0,thickness/2,1.7},\n        width = 1200,\n        height = 1000,\n        font_size = CONFIG.FONT_SIZE/3,\n        scale={x=1, y=1, z=1},\n        font_color= CONFIG.FONT_COLOR,\n        color = {0,0,0,0}\n        })\n\n    setTooltips()\nend\n\nfunction editName(_obj, _string, value)\n    self.setName(value)\n    setTooltips()\nend\n\nfunction add_subtract(_obj, _color, alt_click)\n    mod = alt_click and -1 or 1\n    new_value = math.min(math.max(CONFIG.VALUE + mod, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)\n    if CONFIG.VALUE ~= new_value then\n        CONFIG.VALUE = new_value\n        updateVal()\n        updateSave()\n    end\nend\n\nfunction updateVal()\n    self.editButton({\n        index = 0,\n        label = tostring(CONFIG.VALUE)\n        })\n    setTooltips()\nend\n\nfunction setTooltips()\n    if CONFIG.TOOLTIP_SHOW then\n        ttText = self.getName().. \": \" .. CONFIG.VALUE\n    else\n        ttText = self.getName()\n    end\n\n    self.editInput({\n        index = 0,\n        value = self.getName(),\n        tooltip = ttText\n        })\n    self.editButton({\n        index = 0,\n        value = tostring(CONFIG.VALUE),\n        tooltip = ttText\n        })\nend\n", "LuaScriptState": "{\"COLOR_HEX\":\"#FFFFFF\",\"CONTEXT_FIVE\":true,\"CONTEXT_TEN\":true,\"FONT_COLOR\":[1,1,1,95],\"FONT_SIZE\":600,\"MAX_VALUE\":100,\"MIN_VALUE\":0,\"NUMBER_TYPED\":true,\"TOOLTIP_SHOW\":true,\"VALUE\":0}", "XmlUI": ""}]]
+
  --On Load: Finds the Villain Info object and creates the buttons
  function onLoad(save_state)
  VILLAIN_INFO = findObjectByName("Cheese").getTable('VILLAIN_INFO')
@@ -21,9 +25,9 @@
  self.createButton(button)
  _G['select'..villain] = function(object, color) selectVillain(villain, color) end
  end
- self.createButton({click_function = "selectRandom", function_owner = self, label = "Select a Random Villain", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 1, 1}, width = 2175, height = 1500, font_size = 200, tooltip="Select a Random Villain"})
+ self.createButton({click_function = "selectRandom", function_owner = self, label = "Select a Random Villain", position = {0, -0.05, 0}, rotation = {0, 0, 180}, scale = {1, 1, 1}, width = 2670, height = 1240, font_size = 220, tooltip="Select a Random Villain"})
  end
- 
+
  --Randomizer for when the Random Villain button is selected
  function selectRandom(object, color)
  local choices = {}
@@ -32,30 +36,30 @@
  end
  selectVillain(choices[math.random(1,#choices)], color, true)
  end
- 
+
  --Sets up the selected villain based on jsons from Villain Info
  function selectVillain(villain, color, random)
  local objects = {}
- 
+
  if VILLAIN_INFO.Marvel[villain] ~= nil then
  objects=VILLAIN_INFO.Marvel[villain].data
  end
  --powerBug()
  --Delete selector board
  self.destruct()
- 
+
  --A callback function to rotate board on y based on selector orientation
  local selectorRotation = self.getRotation()
  function callback(object)
  object.setRotation({object.getRotation().x, object.getRotation().y+selectorRotation.y, object.getRotation().z})
  end
- 
+
  --Reverse scale from the selector
  local selectorScale = self.getScale()
  selectorScale.x = 1/selectorScale.x
  selectorScale.y = 1/selectorScale.y
  selectorScale.z = 1/selectorScale.z
- 
+
  for _, villainObj in ipairs(objects) do
  --Take vector from villain table and reverse scale based on selector
  local vec = Vector(villainObj.move_to) * selectorScale
@@ -71,7 +75,7 @@
  callback_function = callback
  })
  end
- 
+
  --Move hands to where villain was spawned
  --Place hand up 4 and 15 back
  local direction = Vector(0, 4, 15)
@@ -83,11 +87,11 @@
  rotation = {0, selectorRotation.y+180, 0},
  scale = {10, 8, 5}
  })
- 
+
  --deleteTempPower()
  shuffleFateDeck(villain)
  end
- 
+
  --Finds an object at the table by name and returns it
  function findObjectByName(name)
  for _, obj in ipairs(getAllObjects()) do
@@ -95,7 +99,7 @@
  end
  return nil
  end
- 
+
  --Shuffles the villain fate deck into the common fate deck
  function shuffleFateDeck(villain)
  local common_deck = findObjectByName("Common Fate Deck")
@@ -107,7 +111,7 @@
  common_deck.shuffle()
  end
  end
- 
+
  --[[Handle Power counter bug
  function powerBug()
  local power = findObjectByName("Power")
