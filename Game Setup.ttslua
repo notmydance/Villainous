@@ -43,6 +43,7 @@ aniShow =Global.getVar('aniShow')
 aniSelc =Global.getVar('aniSelc')
 aniFate =Global.getVar('aniFate')
 aniRef =Global.getVar('aniRef')
+aniYT =Global.getVar('aniYT')
 
 disney_list = {
   {name="Despicable Plots", url="http://cloud-3.steamusercontent.com/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
@@ -394,6 +395,8 @@ function spawnAnime()
     die.takeObject({position={-13.00, 2.34, 0},smooth=false})
     obj = getObjectFromGUID(aniRef)
     x = obj.takeObject({rotation={0,180,0}, position={-13, 1.5, 0.00}, smooth=false})
+    obj = getObjectFromGUID(aniYT)
+    x = obj.takeObject({rotation={0,0,0}, position={43, 1.5, 0.00}, smooth=false})
     x.setLock(true)
 
 
