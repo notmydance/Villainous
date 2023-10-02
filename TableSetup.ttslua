@@ -432,14 +432,14 @@ function createSurfaceInput()
     end
     self.createInput({
         label="Nickname", input_function="none", function_owner=self,
-        alignment=3, position={0,0,4}, height=224, width=4000,
+        alignment=3, position={-4.5,0,3}, height=224, width=3000,
         font_size=200, tooltip="Enter nickname for table image (only used for save)",
         value=nickname
     })
     self.createInput({
         label="URL", input_function="none", function_owner=self,
-        alignment=3, position={0,0,4.7}, height=224, width=4000,
-        font_size=200, tooltip="Enter URL for tabletop image",
+        alignment=3, position={-4.5,0,3.7}, height=224, width=3000,
+        font_size=200, tooltip="Enter URL for tabletop dimage",
         value=currentURL
     })
 end
@@ -447,24 +447,24 @@ end
 function createSurfaceButtons()
     --Label
     self.createButton({
-        label="Tabletop Surface Image", click_function="none",
-        position={0,0,3}, height=0, width=0, font_size=300, font_color={1,1,1}
+        label="Current Tabletop Art", click_function="none",
+        position={-4.5,0,2}, height=0, width=0, font_size=300, font_color={1,1,1}
     })
     --Functional
     self.createButton({
         label="Apply Image\nTo Table", click_function="click_applySurface",
         function_owner=self, tooltip="Apply URL as table image",
-        position={2,0,5.7}, height=440, width=1400, font_size=200,
+        position={0.3,0,4}, height=440, width=1200, font_size=200,
     })
     self.createButton({
         label="Save Image\nTo Memory", click_function="click_saveSurface",
         function_owner=self, tooltip="Record URL into memory (requires nickname)",
-        position={-2,0,5.7}, height=440, width=1400, font_size=200,
+        position={0.3,0,2.8}, height=440, width=1200, font_size=200,
     })
     --Label
     self.createButton({
-        label="Load From Memory", click_function="none",
-        position={0,0,7.7}, height=0, width=0, font_size=300, font_color={1,1,1}
+        label="Load Tabletop Art", click_function="none",
+        position={4.5,0,-3.15}, height=0, width=0, font_size=300, font_color={1,1,1}
     })
     --Saves, created dynamically from memory file
     for i, memoryEntry in ipairs(tableImageData) do
@@ -475,17 +475,7 @@ function createSurfaceButtons()
         self.createButton({
             label=memoryEntry.name, click_function=funcName,
             function_owner=self, tooltip=memoryEntry.url, font_size=200,
-            position={-0.6,0,8.5+0.5*(i-1)}, height=240, width=3300,
-        })
-        --Delete
-        local funcName = i.."deleteMemory"
-        local func = function(x,y) click_deleteMemory(x,y,i) end
-        self.setVar(funcName, func)
-        self.createButton({
-            label="DELETE", click_function=funcName,
-            function_owner=self, tooltip="",
-            position={3.6,0,8.5+0.5*(i-1)}, height=240, width=600,
-            font_size=160, font_color={1,0,0}, color={0.8,0.8,0.8}
+            position={4.5,0,-2.4+0.5*(i-1)}, height=240, width=2500,
         })
     end
 end
@@ -518,7 +508,7 @@ function createScaleButtons()
     })
     self.createButton({
         label="Automatic Table Image:", click_function="none",
-        position={-0.345,0,6.805}, height=0, width=0, font_size=200, font_color={1,1,1}
+        position={-4.845,0,4.405}, height=0, width=0, font_size=200, font_color={1,1,1}
     })
     --Disabled due to me removing the feature for technical reasons
     --[[
@@ -533,7 +523,7 @@ function createScaleButtons()
     self.createButton({
         label=label, click_function="click_checkMove",
         function_owner=self, tooltip="Check to have table image changed when spawning in a new game",
-        position={2.245,0,6.8}, height=224, width=224, font_size=200,
+        position={-2.255,0,4.4}, height=224, width=224, font_size=200,
     })
     --[[
     local label = ""

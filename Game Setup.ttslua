@@ -17,6 +17,7 @@ dVilSelc =Global.getVar('dVilSelc')
 disCaud =Global.getVar('disCaud')
 disStr =Global.getVar('disStr')
 disGob =Global.getVar('disGob')
+iteDeck =Global.getVar('iteDeck')
 mouseBot =Global.getVar('mouseBot')
 marVInst =Global.getVar('marvInst')
 marRef =Global.getVar('marRef')
@@ -52,6 +53,7 @@ disney_list = {
   {name="Perfectly Wretched", url="http://cloud-3.steamusercontent.com/ugc/1699529613851492778/3C87069D1A4EE232BA9F23567817EECB1CE40042/"},
   {name="The Worst Takes it All", url="http://cloud-3.steamusercontent.com/ugc/1782840181541276129/24929ED7934DC4D5833070D86D0F71CB30D7A097/"},
   {name="Wicked to the Core", url="http://cloud-3.steamusercontent.com/ugc/1782840181541277144/74D3420D57F7C1BA0C70A7C27003212EE1054636/"},
+  {name="Introduction to Evil", url="http://cloud-3.steamusercontent.com/ugc/2036241241810693614/2DD4B62B7EAAA6C5A562C9702D004E67BECA2FCF/"},
   {name="", url=""},
 }
 
@@ -65,7 +67,7 @@ marvel_list = {
 
 star_list = {
   {name="Power of the Dark Side", url="http://cloud-3.steamusercontent.com/ugc/1822276928233573514/A35DB28D338CAB1936C0A84FAF6F107F93B496D4/"},
-  {name="Scum and Villainy", url="http://cloud-3.steamusercontent.com/ugc/1822276928233573514/A35DB28D338CAB1936C0A84FAF6F107F93B496D4/"},
+  {name="Scum and Villainy", url="http://cloud-3.steamusercontent.com/ugc/2036241875386760858/013400C12FE1C8E3D2BB0E6FA6A0BCCDB25E24A7/"},
   {name="", url=""},
 }
 
@@ -271,11 +273,10 @@ function spawnDis()
     tableDisney()
     obj = getObjectFromGUID(dVilSelc)
     x = obj.takeObject({rotation={0,180,0},
-    position={0.00, 1.55, 0.00},smooth=false})
+    position={0.00, 1.55, 1.25},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disVInst)
     x = obj.takeObject({rotation={0,270,0}, position={36.5, 1.48, 0.00},smooth=false})
-    x.setLock(true)
     obj = getObjectFromGUID(disPow)
     x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={13.70, 3.10, -1.09}, smooth=false})
     x.setLock(true)
@@ -289,16 +290,13 @@ function spawnDis()
     x = obj.takeObject({rotation={0.00, 180.00, 0.00},position={-13.00, 1.07, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disFtTk)
-    obj.takeObject({rotation={0,270,0}, position={37, 1.74, 0},smooth=false})
+    obj.takeObject({rotation={0,270,0}, position={49, 1.74, 0},smooth=false})
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={37, 2.46, 0},smooth=false})
+    die.takeObject({position={49, 2.46, 0},smooth=false})
     obj = getObjectFromGUID(infCdyld)
-    x = obj.takeObject({rotation={0,270,0},
-    position={33.25, 1.75, 0}, smooth=false})
+    x = obj.takeObject({rotation={0,270,0}, position={45.25, 1.75, 0}, smooth=false})
     obj = getObjectFromGUID(disRef)
-    x = obj.takeObject({rotation={0,270,0},
-    position={27.50, 1.48, 0.00}, smooth=false})
-    x.setLock(true)
+    x = obj.takeObject({rotation={0,270,0}, position={27.50, 1.48, 0.00}, smooth=false})
 
 end
 
@@ -311,10 +309,8 @@ function spawnMar()
     x.setLock(true)
     obj = getObjectFromGUID(marVInst)
     x = obj.takeObject({rotation={0,270,0},position={45,1.48,0},smooth=false})
-    x.setLock(true)
     obj = getObjectFromGUID(marRef)
     x = obj.takeObject({rotation={0,270,0},position={36,1.48,0},smooth=false})
-    x.setLock(true)
     obj = getObjectFromGUID(marPow)
     x = obj.takeObject({position={9.29, 3.56, 0.17},rotation={353.74, 185.05, 173.10},smooth=false})
     x.setLock(true)
@@ -347,7 +343,6 @@ function spawnStar()
     x.setLock(true)
     obj = getObjectFromGUID(starInst)
     x = obj.takeObject({rotation={0,270,0}, position={36.5, 1.48, 0.00},smooth=false})
-    x.setLock(true)
     obj = getObjectFromGUID(starCha)
     x = obj.takeObject({position={17, 2.07, 0}, smooth=false})
     x.setLock(true)
@@ -366,7 +361,6 @@ function spawnStar()
     x = obj.takeObject({rotation={0,270,0}, position={39.00, 1.68, 0}, smooth=false})
     obj = getObjectFromGUID(starRef)
     x = obj.takeObject({rotation={0,270,0}, position={26, 1.5, 0.00}, smooth=false})
-    x.setLock(true)
 
 
 end
@@ -432,7 +426,7 @@ function spawnCom()
     position={0.00, 2.49, -10.00},smooth=false})
     local bag = getObjectFromGUID(mouseBot)
     bag.takeObject({rotation={0,0,0},
-    position={0, 1.40, 12.00},smooth=false})
+    position={-40, 1.40, 25.00},smooth=false})
     bag.setLock(true)
     local bag = getObjectFromGUID(infCnn)
     cnn = bag.takeObject({rotation={0,90,0},
@@ -444,10 +438,10 @@ function spawnCom()
     position={0.00, 4.85, 20.00}, smooth=false})
     local bag = getObjectFromGUID(infVlnDk)
     bag.takeObject({rotation={0,90,180},
-    position={5.00, 1.48, -10.00}, smooth=false})
-    local bag = getObjectFromGUID(infVlnDk)
+    position={22, 1.48, -1.13}, smooth=false})
+    local bag = getObjectFromGUID(iteDeck)
     bag.takeObject({rotation={0,90,180},
-    position={-5.00, 1.48, -10.00}, smooth=false})
+    position={22, 1.48, 1.13}, smooth=false})
    else
    end
    if findObjectByName("Choose Your Marvel Villain [BAG]") then
@@ -509,7 +503,7 @@ function preSelect()
     gamePickButtonGo()
     local bag = getObjectFromGUID(preSel)
     bag.takeObject({rotation={0,0,0},
-    position={0.00, 1.57, 7.00},smooth=false})
+    position={0.00, 1.57, 15.00},smooth=false})
 end
 
 
