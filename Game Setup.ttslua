@@ -45,6 +45,8 @@ aniSelc =Global.getVar('aniSelc')
 aniFate =Global.getVar('aniFate')
 aniRef =Global.getVar('aniRef')
 aniYT =Global.getVar('aniYT')
+aniAst =Global.getVar('aniAst')
+aniFlp =Global.getVar('aniFlp')
 
 disney_list = {
   {name="Despicable Plots", url="http://cloud-3.steamusercontent.com/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
@@ -96,6 +98,7 @@ customs_list = {
 
 anime_list = {
   {name="Battle Begins", url="https://cdn.discordapp.com/attachments/991989912293355540/995307942549139536/battlebeginsart.png"},
+  {name="Human Resources", url="http://cloud-3.steamusercontent.com/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
   {name="", url=""},
 }
 
@@ -375,24 +378,28 @@ function spawnAnime()
     x = obj.takeObject({rotation={0,180,0}, position={0.00, 1.67, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(aniInst)
-    x = obj.takeObject({rotation={0,180,0}, position={30, 1.48, 0.00},smooth=false})
+    x = obj.takeObject({rotation={0,180,0}, position={32.00, 1.48, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(aniPlus)
-    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={10.74, 1.46, 1.42}, smooth=false})
+    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={11.12, 1.46, 1.42}, smooth=false})
     obj = getObjectFromGUID(aniMinus)
-    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={15.09, 1.46, -1.00}, smooth=false})
+    x = obj.takeObject({rotation={0.00, 90, 0.00}, position={13.03, 5.09, 0.65}, smooth=false})
     obj = getObjectFromGUID(aniShow)
     x = obj.takeObject({rotation={0.00, 210, 0.00}, position={12.71, 5.14, 0.62}, smooth=false})
     obj = getObjectFromGUID(aniFate)
     x = obj.takeObject({rotation={0.00, 180.00, 0.00}, position={10.86, 1.53, -1.94}, smooth=false})
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={-13.00, 2.34, 0},smooth=false})
+    die.takeObject({position={-13.00, 2.34, 1.50},smooth=false})
     obj = getObjectFromGUID(aniRef)
-    x = obj.takeObject({rotation={0,180,0}, position={-13, 1.5, 0.00}, smooth=false})
+    x = obj.takeObject({rotation={0,180,0}, position={-13, 1.5, 1.50}, smooth=false})
     obj = getObjectFromGUID(aniYT)
     x = obj.takeObject({rotation={0,180,0}, position={-27.5, 1.5, 0.00}, smooth=false})
     x.setLock(true)
-
+    obj = getObjectFromGUID(aniAst)
+    x = obj.takeObject({rotation={0,180,0}, position={0.00, 1.28, 30.00}, smooth=false})
+    x.setLock(true)
+    obj = getObjectFromGUID(aniFlp)
+    x = obj.takeObject({position={-13.00, 2.34, -1.00},smooth=false})
 
 end
 
