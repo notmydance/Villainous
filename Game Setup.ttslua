@@ -18,6 +18,7 @@ disCaud =Global.getVar('disCaud')
 disStr =Global.getVar('disStr')
 disGob =Global.getVar('disGob')
 iteDeck =Global.getVar('iteDeck')
+disSetup =Global.getVar('disSetup')
 mouseBot =Global.getVar('mouseBot')
 marVInst =Global.getVar('marvInst')
 marRef =Global.getVar('marRef')
@@ -55,7 +56,10 @@ disney_list = {
   {name="Perfectly Wretched", url="http://cloud-3.steamusercontent.com/ugc/1699529613851492778/3C87069D1A4EE232BA9F23567817EECB1CE40042/"},
   {name="The Worst Takes it All", url="http://cloud-3.steamusercontent.com/ugc/1782840181541276129/24929ED7934DC4D5833070D86D0F71CB30D7A097/"},
   {name="Wicked to the Core", url="http://cloud-3.steamusercontent.com/ugc/1782840181541277144/74D3420D57F7C1BA0C70A7C27003212EE1054636/"},
-  {name="Introduction to Evil", url="http://cloud-3.steamusercontent.com/ugc/2036241241810693614/2DD4B62B7EAAA6C5A562C9702D004E67BECA2FCF/"},
+  {name="Introduction to Evil", url="http://cloud-3.steamusercontent.com/ugc/2518144890880453572/8852A766E3689E9183342037AC484BEA546C2C74/"},
+  {name="Introduction to Evil", url="http://cloud-3.steamusercontent.com/ugc/2518144890880419709/458AF7B914BDDDDD676962821CF4280C45F0E591/"},
+  {name="Filled with Fright", url="http://cloud-3.steamusercontent.com/ugc/2518144890876674418/AA523D4434DC9FF65638B836BA30ED360E16AF62/"},
+  {name="Sugar and Spite", url="http://cloud-3.steamusercontent.com/ugc/2475361870246598500/8C93FA136B209E844D6A07142D2B6A9B529E3672/"},
   {name="", url=""},
 }
 
@@ -112,10 +116,10 @@ end
 function gamePickButtonGo()
     isOpen = false
     self.createButton({click_function="drawUI", function_owner=self,
-    position={0,0,0}, rotation={90,0,90}, width=350, height=350,
+    position={0,0,0}, rotation={90,0,90}, width=350, height=350, color={0,0,0,0},
     tooltip=setupButt})
     self.createButton({click_function="drawUI", function_owner=self,
-    position={0,0,0}, rotation={0,90,0}, width=345, height=345,
+    position={0,0,0}, rotation={0,90,0}, width=345, height=345, color={0,0,0,0},
     tooltip=setupButt})
 end
 
@@ -281,16 +285,16 @@ function spawnDis()
     obj = getObjectFromGUID(disVInst)
     x = obj.takeObject({rotation={0,270,0}, position={36.5, 1.48, 0.00},smooth=false})
     obj = getObjectFromGUID(disPow)
-    x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={13.70, 3.10, -1.09}, smooth=false})
+    x = obj.takeObject({rotation={46.17, 152.14, 319.13}, position={15.70, 3.10, -1.09}, smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disCaud)
-    x = obj.takeObject({rotation={0.00, 290.00, 0.00}, position={14, 1.585, 0.00}, smooth=false})
+    x = obj.takeObject({rotation={0.00, 290.00, 0.00}, position={16, 1.585, 0.00}, smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disStr)
-    x = obj.takeObject({rotation={0.00, 40.00, 0.00}, position={-13.35, 4.0, -0.25},smooth=false})
+    x = obj.takeObject({rotation={0.00, 40.00, 0.00}, position={-15.35, 4.0, -0.25},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disGob)
-    x = obj.takeObject({rotation={0.00, 180.00, 0.00},position={-13.00, 1.07, 0.00},smooth=false})
+    x = obj.takeObject({rotation={0.00, 180.00, 0.00},position={-15.00, 1.07, 0.00},smooth=false})
     x.setLock(true)
     obj = getObjectFromGUID(disFtTk)
     obj.takeObject({rotation={0,270,0}, position={49, 1.74, 0},smooth=false})
@@ -300,7 +304,10 @@ function spawnDis()
     x = obj.takeObject({rotation={0,270,0}, position={45.25, 1.75, 0}, smooth=false})
     obj = getObjectFromGUID(disRef)
     x = obj.takeObject({rotation={0,270,0}, position={27.50, 1.48, 0.00}, smooth=false})
-
+    obj = getObjectFromGUID(disSetup)
+    x = obj.takeObject({rotation={0,180,0}, position={22.00, 1.48, 0.00}, scale={1.50, 1.50, 1.50}, smooth=false})
+    Global.setVar('introSetup',true)
+    printToAll("Villains will by default follow the setup rules introduced in Introduction to Evil, if wishing to change them, flip the coin located next to the Power Cauldron.")
 end
 
 function spawnMar()
