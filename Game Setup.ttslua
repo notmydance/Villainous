@@ -420,11 +420,11 @@ function spawnDCus()
     tableCustoms()
     local bag = getObjectFromGUID(cusSelc)
     x = bag.takeObject({rotation={0,90,0},
-    position={-36.00, 1.65, 0.00},smooth=false})
+    position={-41.00, 1.65, 0.00},smooth=false})
     x.setLock(true)
     local bag = getObjectFromGUID(cusRef)
     x = bag.takeObject({rotation={0,90,0},
-    position={-27.5, 1.48, 0.00}, smooth=false})
+    position={-32.5, 1.48, 0.00}, smooth=false})
     x.setLock(true)
     printToAll("When you choose your custom Villain, the bottom left number and color is an indicator of the Villain's complexity, both to play as and against. \n \nGreen and 1 are the simplest to understand and are best for new players. \n \nYellow and 2 are of medium complexity and are good for those who are familiar with the game. \n \nRed and 3 are very complex, and are only recommended for those who have a good understanding of Villainous.")
 
