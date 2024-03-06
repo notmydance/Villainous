@@ -195,10 +195,10 @@ function listCus()
     local tooltip12="Anime Villainous"
     self.createButton({click_function="spawnDCus", function_owner=self,
         position={-2.7,0,-4.5}, rotation={0,180,0}, width=1000, height=440,
-        color={0,.75,0}, font_size=150, tooltip=tooltip21, label="Disney\nCustoms"})
+        color={0,.75,0}, font_size=150, tooltip=tooltip11, label="Disney\nCustoms"})
     self.createButton({click_function="spawnAnime", function_owner=self,
         position={-2.7,0,-5.5}, rotation={0,180,0}, width=1000, height=440,
-        color={1,0,0}, font_size=150, tooltip=tooltip22, label="Anime\nVillainous"})
+        color={1,0,0}, font_size=150, tooltip=tooltip12, label="Anime\nVillainous"})
     isCus = true
     else
     self.clearButtons()
