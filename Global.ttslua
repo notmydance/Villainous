@@ -15,6 +15,7 @@ disCaud = "f45f1f"
 disStr = "fe8f3e"
 disGob = "3c721d"
 iteDeck = "1c5f93"
+disSetup = "074205"
 mouseBot = "e68807"
 marvInst = "5ae010"
 marRef = "914c48"
@@ -56,3 +57,6 @@ aniRef = "d4bfb8"
 aniYT = "bd145e"
 aniAst = "a8df5d"
 aniFlp = "cc087f"
+
+introSetup = true
+autoTable = true
