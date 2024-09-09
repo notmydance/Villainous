@@ -8,6 +8,7 @@ infCnn =Global.getVar('infCnn')
 infPlDc =Global.getVar('infPlDc')
 infVlnDk =Global.getVar('infVlnDk')
 infOneHr =Global.getVar('infOneHr')
+infChess =Global.getVar('infChess')
 preSel =Global.getVar('preSel')
 disVInst =Global.getVar('disVInst')
 disRef =Global.getVar('disRef')
@@ -419,7 +420,7 @@ function spawnDCus()
     gamePickButtonGo()
     tableCustoms()
     local bag = getObjectFromGUID(cusSelc)
-    x = bag.takeObject({rotation={0,90,0},
+    x = bag.wtakeObject({rotation={0,90,0},
     position={-41.00, 1.65, 0.00},smooth=false})
     x.setLock(true)
     local bag = getObjectFromGUID(cusRef)
@@ -437,7 +438,7 @@ function spawnCom()
     gamePickButtonGo()
     local bag = getObjectFromGUID(infNineS)
     bag.takeObject({rotation={0,180,0},
-    position={0.00, 2.49, -10.00},smooth=false})
+    position={40.00, 2.49, 20.00},smooth=false})
     local bag = getObjectFromGUID(mouseBot)
     bag.takeObject({rotation={0,0,0},
     position={-40, 1.40, 25.00},smooth=false})
@@ -446,10 +447,13 @@ function spawnCom()
     cnn = bag.takeObject({rotation={0,90,0},
     position={-45.00, 1.48, 0.00}, smooth=false})
     cnn.setLock(true)
+    local bag = getObjectFromGUID(infChess)
+    bag.takeObject({rotation={0,180,0},
+    position={0.00, 1.49, -10.00},smooth=false})
    if findObjectByName("Choose Your Disney Villain [BAG]") then
     local bag = getObjectFromGUID(infFourM)
     bag.takeObject({rotation={0,180,0},
-    position={0.00, 4.85, 20.00}, smooth=false})
+    position={40.00, 4.85, 25.00}, smooth=false})
     local bag = getObjectFromGUID(infVlnDk)
     bag.takeObject({rotation={0,90,180},
     position={22, 1.48, -1.13}, smooth=false})
