@@ -102,7 +102,7 @@ customs_list = {
 }
 
 anime_list = {
-  {name="Battle Begins", url="https://cdn.discordapp.com/attachments/991989912293355540/995307942549139536/battlebeginsart.png"},
+  {name="Battle Begins", url="https://steamusercontent-a.akamaihd.net/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
   {name="Human Resources", url="https://steamusercontent-a.akamaihd.net/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
   {name="", url=""},
 }
