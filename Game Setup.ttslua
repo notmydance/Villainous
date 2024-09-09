@@ -420,7 +420,7 @@ function spawnDCus()
     gamePickButtonGo()
     tableCustoms()
     local bag = getObjectFromGUID(cusSelc)
-    x = bag.wtakeObject({rotation={0,90,0},
+    x = bag.takeObject({rotation={0,90,0},
     position={-41.00, 1.65, 0.00},smooth=false})
     x.setLock(true)
     local bag = getObjectFromGUID(cusRef)
