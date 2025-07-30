@@ -106,7 +106,7 @@ customs_list = {
 }
 
 anime_list = {
-  {name="Battle Begins", url="https://steamusercontent-a.akamaihd.net/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
+  {name="Battle Begins", url="https://steamusercontent-a.akamaihd.net/ugc/17546471104282256/1BF57154185E3A773A3B93EA8986392BCF2782DB/"},
   {name="Human Resources", url="https://steamusercontent-a.akamaihd.net/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
   {name="Piercing the Veil", url="https://steamusercontent-a.akamaihd.net/ugc/1804279580389808213/8AA539FF91338BD0693AA574C6D30A8A6CDEAECA/"},
 }
