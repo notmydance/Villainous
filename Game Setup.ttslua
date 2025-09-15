@@ -49,7 +49,6 @@ aniFate =Global.getVar('aniFate')
 aniRef =Global.getVar('aniRef')
 aniYT =Global.getVar('aniYT')
 aniAst =Global.getVar('aniAst')
-aniFlp =Global.getVar('aniFlp')
 
 disney_list = {
   {name="Despicable Plots", url="https://steamusercontent-a.akamaihd.net/ugc/1782840181541265526/91FF05F376369260ECA081822A0D4EDDB04A3C72/"},
@@ -107,8 +106,8 @@ customs_list = {
 
 anime_list = {
   {name="Battle Begins", url="https://steamusercontent-a.akamaihd.net/ugc/17546471104282256/1BF57154185E3A773A3B93EA8986392BCF2782DB/"},
-  {name="Human Resources", url="https://steamusercontent-a.akamaihd.net/ugc/1885345498820449916/D9A64AFC9E875DCD27F0A2CC9ED9F61C80B401A2/"},
-  {name="Piercing the Veil", url="https://steamusercontent-a.akamaihd.net/ugc/1804279580389808213/8AA539FF91338BD0693AA574C6D30A8A6CDEAECA/"},
+  {name="Human Resources", url="https://steamusercontent-a.akamaihd.net/ugc/17546471104282256/1BF57154185E3A773A3B93EA8986392BCF2782DB/"},
+  {name="Piercing the Veil", url="https://steamusercontent-a.akamaihd.net/ugc/17546471104281064/9E8C508DAC402782E3C8058A448B4971EF13D545/"},
 }
 
 function onLoad()
@@ -392,7 +391,7 @@ function spawnAnime()
     obj = getObjectFromGUID(aniFate)
     x = obj.takeObject({rotation={0.00, 180.00, 0.00}, position={11.50, 1.53, -2.20}, smooth=false})
     die = getObjectFromGUID(infPlDc)
-    die.takeObject({position={-14.80, 2.15, -2.50},smooth=false})
+    die.takeObject({position={-13.00, 2.15, -2.50},smooth=false})
     obj = getObjectFromGUID(aniRef)
     x = obj.takeObject({rotation={0,180,0}, position={-13, 1.5, 1.50}, smooth=false})
     --obj = getObjectFromGUID(aniYT)
@@ -401,8 +400,6 @@ function spawnAnime()
     obj = getObjectFromGUID(aniAst)
     x = obj.takeObject({rotation={0,180,0}, position={0.00, 1.31, 30.00}, smooth=false})
     x.setLock(true)
-    obj = getObjectFromGUID(aniFlp)
-    x = obj.takeObject({position={-11.70, 1.48, -2.50},smooth=false})
 
 end
 
